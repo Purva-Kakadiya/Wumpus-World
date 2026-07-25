@@ -152,13 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa3a05a109e2ba4c855483b1fb3cc84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Square
-  moveDistance: 100
+  moveDistance: 1
   squareSelectButton: {fileID: 2561813798754633756}
   castHitLayer:
     serializedVersion: 2
     m_Bits: 32
-  edgeLength: 1
-  boxHeight: 0.5
+  edgeLength: 0.1
+  extraDistance: 0.5
+  boxCastMaxDistance: 0.1
 --- !u!1 &5447305443111022880
 GameObject:
   m_ObjectHideFlags: 0

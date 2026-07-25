@@ -17,6 +17,10 @@ public class SelectionManager : MonoBehaviour {
         this.activeObject = activeObject;
     }
 
+    public void SetEveryObjectDeactive() {
+        activeObject = null;
+    }
+
     public GameObject GetActiveObject() {
         return activeObject;
     }

@@ -10,7 +10,10 @@ public class PerceptUI : MonoBehaviour {
     [SerializeField] private Button spawnSquareButton;
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
+    [SerializeField] private Transform confirmPanel;
     [SerializeField] private Square square;
+
+    private Square squareCell;
 
 
     private void Awake() {
@@ -21,31 +24,30 @@ public class PerceptUI : MonoBehaviour {
         Instance = this;
 
         spawnSquareButton.onClick.AddListener(() => {
+            confirmPanel.gameObject.SetActive(true);
             SpawnTheSquare();
-            confirmButton.gameObject.SetActive(true);
-            cancelButton.gameObject.SetActive(true);
         });
 
         confirmButton.onClick.AddListener(() => {
-            confirmButton.gameObject.SetActive(false);
-            cancelButton.gameObject.SetActive(false);
+            confirmPanel.gameObject.SetActive(false);
         });
 
         cancelButton.onClick.AddListener(() => {
-            square.DestroySelf();
-            confirmButton.gameObject.SetActive(false);
-            cancelButton.gameObject.SetActive(false);
+            DestroyCell();
+            confirmPanel.gameObject.SetActive(false);
         });
 
-        confirmButton.gameObject.SetActive(false);
-        cancelButton.gameObject.SetActive(false);
+        confirmPanel.gameObject.SetActive(false);
     }
-
     private void SpawnTheSquare() {
 
         Vector2 spawnLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Square squareCell = Instantiate(square, spawnLocation, Quaternion.identity);
+        squareCell = Instantiate(square, spawnLocation, Quaternion.identity);
+    }
+
+    private void DestroyCell() {
+        Destroy(squareCell.gameObject);
     }
 
     private void Update() {
