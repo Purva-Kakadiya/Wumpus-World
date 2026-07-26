@@ -5,7 +5,7 @@ public class SelectionManager : MonoBehaviour {
 
     public static SelectionManager Instance { get; private set; }
 
-    [SerializeField] private PerceptUI perceptUI;
+    [SerializeField] private EditMapOptionsUI perceptUI;
 
     private GameObject activeObject;
 

@@ -6,21 +6,22 @@ public class Square : MonoBehaviour {
 
     [SerializeField] private float moveDistance = 1f;
     [SerializeField] private Button squareSelectButton;
-    [SerializeField] private LayerMask castHitLayer;
-    [SerializeField] private float edgeLength = 0.5f;
-    [SerializeField] private float extraDistance = 0.5f;
-    [SerializeField] private float boxCastMaxDistance = 0.5f;
 
-    private Color rayColor = Color.red;
-    private BoxCollider2D boxCollider2D;
+    private PolygonCollider2D polygonCollider;
+    private BoxCastAndSnappingManager boxCastAndSnappingManager;
 
     private void Awake() {
 
-        boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
+        boxCastAndSnappingManager = GetComponent<BoxCastAndSnappingManager>();
 
         squareSelectButton.onClick.AddListener(() => {
             ActivateSquareMovement();
         });
+    }
+
+    public PolygonCollider2D GetCollider() {
+        return polygonCollider;
     }
 
     private void Update() {
@@ -56,23 +57,23 @@ public class Square : MonoBehaviour {
 
     private void ActivateBoxCast() {
 
-        Vector2 squareCenterLocal = boxCollider2D.offset;
-        Vector2 localRightEdgeCenter = squareCenterLocal + new Vector2(boxCollider2D.size.x / 2, 0f);
-        Vector2 globalRightEdgeCenter = transform.TransformPoint(localRightEdgeCenter);
-        Vector2 boxSize = new Vector2(edgeLength, boxCollider2D.size.y);
+        for (int pathIndex = 0; pathIndex < polygonCollider.pathCount; pathIndex++) {
+            Vector2[] pathPoints = polygonCollider.GetPath(pathIndex);
+            int pointsCount = pathPoints.Length;
 
-        RaycastHit2D hit = Physics2D.BoxCast(globalRightEdgeCenter, boxSize, 0f, Vector2.right, boxCastMaxDistance, castHitLayer);
+            for (int i = 0; i < pointsCount; i++) {
+                Vector2 currentGlobalPoint = polygonCollider.transform.TransformPoint(pathPoints[i]);
+                Vector2 nextGlobalPoint = polygonCollider.transform.TransformPoint(pathPoints[(i + 1) % pointsCount]);
+                Vector2 edgeMiddlePoint = (currentGlobalPoint + nextGlobalPoint) / 2;
+                Vector2 boxCastDirection = (edgeMiddlePoint - (Vector2)polygonCollider.bounds.center).normalized;
 
-        if ((hit.collider != null) && (hit.collider != GetComponent<BoxCollider2D>())) {
-            if (hit.collider.TryGetComponent<Square>(out Square targetSquare)) {
-                targetSquare.SnapToTheRightSide(globalRightEdgeCenter + new Vector2(extraDistance, 0f));
+                boxCastAndSnappingManager.ActivateBoxCastAndSnapping(edgeMiddlePoint, boxCastDirection, polygonCollider);
             }
         }
     }
 
-    private void SnapToTheRightSide(Vector2 snapPoint) {
-        Vector2 globalSnapPointForCenter = snapPoint + new Vector2(boxCollider2D.size.x / 2, 0f);
-        transform.position = globalSnapPointForCenter;
+    public void SnapToThePoint(Vector2 snapPoint) {
+        transform.position = snapPoint;
     }
 
     public void ActivateSquareMovement() {
