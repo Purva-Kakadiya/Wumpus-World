@@ -7,8 +7,10 @@ public class Square : MonoBehaviour {
     [SerializeField] private float moveDistance = 1f;
     [SerializeField] private Button squareSelectButton;
 
+    private bool moveRequested = false;
     private PolygonCollider2D polygonCollider;
     private BoxCastAndSnappingManager boxCastAndSnappingManager;
+    private Vector3 moveDir;
 
     private void Awake() {
 
@@ -27,10 +29,9 @@ public class Square : MonoBehaviour {
     private void Update() {
 
         if (SelectionManager.Instance.GetActiveObject() == gameObject) {
-
             SquareMovementHandler();
         } else {
-
+            moveRequested = false;
             ActivateBoxCast();
         }
 
@@ -38,7 +39,7 @@ public class Square : MonoBehaviour {
 
     private void SquareMovementHandler() {
 
-        Vector3 moveDir = new Vector3();
+        moveDir = new Vector3();
         if (Input.GetKeyDown(KeyCode.W)) {
             moveDir = Vector3.up;
         }
@@ -52,7 +53,17 @@ public class Square : MonoBehaviour {
             moveDir = Vector3.right;
         }
 
-        transform.position += moveDir * moveDistance;
+        if (moveDir != Vector3.zero) {
+            moveRequested = true;
+        }
+    }
+
+    private void FixedUpdate() {
+        Debug.Log("MoveDir is: " + moveDir);
+        if (moveRequested) {
+            transform.position += moveDir * moveDistance;
+            moveRequested = false;
+        }
     }
 
     private void ActivateBoxCast() {

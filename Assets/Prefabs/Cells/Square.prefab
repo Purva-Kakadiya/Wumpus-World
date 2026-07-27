@@ -172,14 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4680bd253d3846816da8693533e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastAndSnappingManager
-  boxCastMaxDistance: 0.1
   castHitLayer:
     serializedVersion: 2
     m_Bits: 8
   distanceBetweenCell: 0.25
   extraDistance: 0.1
-  boxCastLength: 0.05
-  boxCastWidth: 1
+  boxCastLength: 0.1
+  boxCastWidth: 0.1
 --- !u!1 &5447305443111022880
 GameObject:
   m_ObjectHideFlags: 0
