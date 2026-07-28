@@ -11,11 +11,11 @@ public class EditMapOptionsUI : MonoBehaviour {
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private Transform confirmPanel;
-    [SerializeField] private Square square;
+    [SerializeField] private Cell square;
     [SerializeField] private Transform customMap;
     [SerializeField] private LayerMask gridSpawnLayer;
 
-    private Square squareCell;
+    private Cell cell;
     private int spawnLayerValueInInt;
 
 
@@ -30,7 +30,7 @@ public class EditMapOptionsUI : MonoBehaviour {
 
         spawnSquareButton.onClick.AddListener(() => {
             confirmPanel.gameObject.SetActive(true);
-            SpawnTheSquare();
+            SpawnTheCell(square);
         });
 
         confirmButton.onClick.AddListener(() => {
@@ -44,16 +44,16 @@ public class EditMapOptionsUI : MonoBehaviour {
 
         confirmPanel.gameObject.SetActive(false);
     }
-    private void SpawnTheSquare() {
+    private void SpawnTheCell(Cell cell) {
 
         Vector2 spawnLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        squareCell = Instantiate(square, spawnLocation, Quaternion.identity, customMap);
-        squareCell.gameObject.layer = spawnLayerValueInInt;
+        cell = Instantiate(cell, spawnLocation, Quaternion.identity, customMap);
+        cell.gameObject.layer = spawnLayerValueInInt;
     }
 
     private void DestroyCell() {
-        Destroy(squareCell.gameObject);
+        Destroy(cell.gameObject);
     }
 
     private void Update() {

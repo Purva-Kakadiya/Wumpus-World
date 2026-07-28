@@ -14,10 +14,10 @@ public class BoxCastAndSnappingManager : MonoBehaviour {
 
 
         if ((hit.collider != null) && (hit.collider != originCollider2D)) {
-            if (hit.collider.TryGetComponent<Square>(out Square targetSquare)) {
+            if (hit.collider.TryGetComponent<Cell>(out Cell targetSquare)) {
                 PolygonCollider2D targetCollider2D = targetSquare.GetCollider();
                 Vector2 targetColliderCenter = targetCollider2D.bounds.center;
-                targetSquare.SnapToThePoint(boxCastOrigin + (direction * targetCollider2D.bounds.extents) + (direction * distanceBetweenCell));
+                targetSquare.SnapToThePointAndDeactivateObject(boxCastOrigin + (direction * targetCollider2D.bounds.extents) + (direction * distanceBetweenCell));
             }
         }
     }

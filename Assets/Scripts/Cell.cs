@@ -2,23 +2,25 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Square : MonoBehaviour {
+public class Cell : MonoBehaviour {
 
     [SerializeField] private float moveDistance = 1f;
-    [SerializeField] private Button squareSelectButton;
+    [SerializeField] private Button cellSelectionButton;
+    [SerializeField] private float snapTimerMax = 3f;
 
     private bool moveRequested = false;
     private PolygonCollider2D polygonCollider;
     private BoxCastAndSnappingManager boxCastAndSnappingManager;
     private Vector3 moveDir;
+    private float snappingTimer;
 
     private void Awake() {
 
         polygonCollider = GetComponent<PolygonCollider2D>();
         boxCastAndSnappingManager = GetComponent<BoxCastAndSnappingManager>();
 
-        squareSelectButton.onClick.AddListener(() => {
-            ActivateSquareMovement();
+        cellSelectionButton.onClick.AddListener(() => {
+            ActivateCellMovement();
         });
     }
 
@@ -29,7 +31,7 @@ public class Square : MonoBehaviour {
     private void Update() {
 
         if (SelectionManager.Instance.GetActiveObject() == gameObject) {
-            SquareMovementHandler();
+            CellMovementHandler();
         } else {
             moveRequested = false;
             ActivateBoxCast();
@@ -37,19 +39,19 @@ public class Square : MonoBehaviour {
 
     }
 
-    private void SquareMovementHandler() {
+    private void CellMovementHandler() {
 
         moveDir = new Vector3();
-        if (Input.GetKeyDown(KeyCode.W)) {
+        if (Input.GetKey(KeyCode.W)) {
             moveDir = Vector3.up;
         }
-        if (Input.GetKeyDown(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S)) {
             moveDir = Vector3.down;
         }
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A)) {
             moveDir = Vector3.left;
         }
-        if (Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D)) {
             moveDir = Vector3.right;
         }
 
@@ -59,10 +61,15 @@ public class Square : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        Debug.Log("MoveDir is: " + moveDir);
         if (moveRequested) {
             transform.position += moveDir * moveDistance;
             moveRequested = false;
+        }
+
+        if(snappingTimer > 0f) {
+            snappingTimer -= Time.fixedDeltaTime;
+        } else {
+            snappingTimer = 0f;
         }
     }
 
@@ -83,15 +90,19 @@ public class Square : MonoBehaviour {
         }
     }
 
-    public void SnapToThePoint(Vector2 snapPoint) {
-        transform.position = snapPoint;
+    public void SnapToThePointAndDeactivateObject(Vector2 snapPoint) {
+        if (snappingTimer <= 0f) {
+            transform.position = snapPoint;
+            snappingTimer = snapTimerMax;
+            SelectionManager.Instance.DeactivateObject(gameObject);
+        }
     }
 
-    public void ActivateSquareMovement() {
+    public void ActivateCellMovement() {
         SelectionManager.Instance.SetActiveObject(gameObject);
     }
 
-    public void DeactivateSquareMovement() {
+    public void DeactivateCellMovement() {
         SelectionManager.Instance.SetEveryObjectDeactive();
     }
 

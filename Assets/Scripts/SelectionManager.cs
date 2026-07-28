@@ -5,8 +5,6 @@ public class SelectionManager : MonoBehaviour {
 
     public static SelectionManager Instance { get; private set; }
 
-    [SerializeField] private EditMapOptionsUI perceptUI;
-
     private GameObject activeObject;
 
     private void Awake() {
@@ -15,6 +13,12 @@ public class SelectionManager : MonoBehaviour {
 
     public void SetActiveObject(GameObject activeObject) {
         this.activeObject = activeObject;
+    }
+
+    public void DeactivateObject(GameObject deactivingObject) {
+        if(activeObject == deactivingObject) {
+            activeObject = null;
+        }
     }
 
     public void SetEveryObjectDeactive() {
