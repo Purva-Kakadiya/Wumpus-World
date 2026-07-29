@@ -29,4 +29,8 @@ public class SelectionManager : MonoBehaviour {
         return activeObject;
     }
 
+    private void Update() {
+        Debug.Log(SelectionManager.Instance.GetActiveObject());
+    }
+
 }

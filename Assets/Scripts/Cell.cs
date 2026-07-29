@@ -24,6 +24,18 @@ public class Cell : MonoBehaviour {
         });
     }
 
+    private void Start() {
+        EditMapOptionsUI.Instance.OnRotateButtonPressed += EditMapOptionsUI_OnRotateButtonPressed;
+    }
+
+    private void EditMapOptionsUI_OnRotateButtonPressed(object sender, EventArgs e) {
+        if (SelectionManager.Instance.GetActiveObject() != null) {
+            Cell activeCell = (SelectionManager.Instance.GetActiveObject()).GetComponent<Cell>();
+            float activeRotationOnZAxis = activeCell.transform.eulerAngles.z;
+            activeCell.transform.rotation = Quaternion.Euler(0f, 0f, activeRotationOnZAxis + 10f);
+        }
+    }
+
     public PolygonCollider2D GetCollider() {
         return polygonCollider;
     }
