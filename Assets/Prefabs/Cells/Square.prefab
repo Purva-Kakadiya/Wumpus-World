@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1148960036469500128}
   - component: {fileID: 7409534809341834527}
   - component: {fileID: 5674897884642493431}
-  - component: {fileID: 6008185553352026895}
+  - component: {fileID: 6203609035378724309}
+  - component: {fileID: 4808971427599715431}
   m_Layer: 5
   m_Name: Square
   m_TagString: Untagged
@@ -158,10 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa3a05a109e2ba4c855483b1fb3cc84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Square
-  moveDistance: 0.15
   cellSelectionButton: {fileID: 2561813798754633756}
-  snapTimerMax: 3
---- !u!114 &6008185553352026895
+--- !u!114 &6203609035378724309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,16 +169,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2071208822329600580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4680bd253d3846816da8693533e79, type: 3}
+  m_Script: {fileID: 11500000, guid: 38bb7921953a01f488e332f8d4a9b3ee, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoxCastAndSnappingManager
+  m_EditorClassIdentifier: Assembly-CSharp::HandleMovement
+  moveDistance: 0.15
+  rotationAngle: 30
+--- !u!114 &4808971427599715431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071208822329600580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89ff400625584344a09c27a28d15d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
+  boxCastLength: 0.1
+  boxCastWidth: 0.1
+  extraDistance: 0.1
+  distanceBetweenCell: 0.2
   castHitLayer:
     serializedVersion: 2
     m_Bits: 8
-  distanceBetweenCell: 0.2
-  extraDistance: 0.1
-  boxCastLength: 0.1
-  boxCastWidth: 0.1
 --- !u!1 &5447305443111022880
 GameObject:
   m_ObjectHideFlags: 0
