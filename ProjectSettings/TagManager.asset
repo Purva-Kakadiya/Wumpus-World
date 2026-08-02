@@ -41,5 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Grid Map
+    uniqueID: 2223038719
+    locked: 0
+  - name: UI
+    uniqueID: 1448514761
+    locked: 0
   m_RenderingLayers:
   - Default

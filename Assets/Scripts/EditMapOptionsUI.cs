@@ -14,7 +14,6 @@ public class EditMapOptionsUI : MonoBehaviour {
     [SerializeField] private Button spawnHexagonButton;
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
-    [SerializeField] private Button rotateButton;
     [SerializeField] private Transform confirmPanel;
     [SerializeField] private Cell square;
     [SerializeField] private Cell triangle;
@@ -22,8 +21,8 @@ public class EditMapOptionsUI : MonoBehaviour {
     [SerializeField] private Transform customMap;
     [SerializeField] private LayerMask gridSpawnLayer;
 
-    private Cell cell;
     private int spawnLayerValueInInt;
+    private Cell lastSpawnedCell;
 
 
     private void Awake() {
@@ -51,7 +50,7 @@ public class EditMapOptionsUI : MonoBehaviour {
         });
 
         confirmButton.onClick.AddListener(() => {
-            confirmPanel.gameObject.SetActive(false);
+            OnConfirmPressed();
         });
 
         cancelButton.onClick.AddListener(() => {
@@ -59,22 +58,30 @@ public class EditMapOptionsUI : MonoBehaviour {
             confirmPanel.gameObject.SetActive(false);
         });
 
-        rotateButton.onClick.AddListener(() => {
-            OnRotateButtonPressed?.Invoke(this, EventArgs.Empty);
-        });
-
         confirmPanel.gameObject.SetActive(false);
     }
+
+    private void OnConfirmPressed() {
+        confirmPanel.gameObject.SetActive(false);
+
+        Transform updatedTransform = lastSpawnedCell.GetTransform(lastSpawnedCell);
+        lastSpawnedCell = null;
+    }
+
     private void SpawnTheCell(Cell cell) {
 
         Vector2 spawnLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         cell = Instantiate(cell, spawnLocation, Quaternion.identity, customMap);
         cell.gameObject.layer = spawnLayerValueInInt;
+        cell.ActivateCellMovement();
+
+        lastSpawnedCell = cell;
     }
 
     private void DestroyCell() {
-        Destroy(cell.gameObject);
+        Destroy(lastSpawnedCell.gameObject);
+        lastSpawnedCell = null;
     }
 
 }

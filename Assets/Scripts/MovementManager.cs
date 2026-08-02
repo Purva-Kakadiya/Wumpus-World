@@ -4,11 +4,12 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour {
 
     [SerializeField] private float moveDistance = 0.15f;
-    [SerializeField] private float rotationAngle = 10f;
+    [SerializeField] private Vector3 rotationAngle = new Vector3(0f, 0f, 10f);
 
     private Cell cell;
     private Vector3 moveDir;
     private bool moveRequested = false;
+    private bool rotationRequested = false;
 
     private void Awake() {
         cell = GetComponent<Cell>();
@@ -34,6 +35,10 @@ public class MovementManager : MonoBehaviour {
             if (moveDir != Vector3.zero) {
                 moveRequested = true;
             }
+
+            if(Input.GetKeyDown(KeyCode.R)) {
+                rotationRequested = true;
+            }
         }
     }
 
@@ -43,19 +48,19 @@ public class MovementManager : MonoBehaviour {
             moveRequested = false;
         }
 
+        if(rotationRequested) {
+            //transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.z + 10f);
+            transform.Rotate(rotationAngle);
+            rotationRequested = false;
+        }
     }
 
     public void GoToPoint(Vector3 movePoint) {
         transform.position = movePoint;
     }
 
-    public void RotateObject() {
-        if (SelectionManager.Instance.GetActiveObject() != null) {
-            Cell activeCell = (SelectionManager.Instance.GetActiveObject()).GetComponent<Cell>();
-            float activeRotationOnZAxis = activeCell.transform.eulerAngles.z;
-            activeCell.transform.rotation = Quaternion.Euler(0f, 0f, activeRotationOnZAxis + rotationAngle);
-        }
-
+    public Transform GetObjectTransform(Cell cell) {
+        return cell.transform;
     }
 
 }

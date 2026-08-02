@@ -19,20 +19,19 @@ public class Cell : MonoBehaviour {
         });
     }
 
+    public Transform GetTransform(Cell cell) {
+        //Transform cellTransform = movementManager.GetObjectTransform(cell);
+        //return cellTransform;
+
+        return cell.transform;
+    }
+
     public bool IsObjectSelected() {
         if(gameObject == SelectionManager.Instance.GetActiveObject()) {
             return true;
         } else {
             return false;
         }
-    }
-
-    private void Start() {
-        EditMapOptionsUI.Instance.OnRotateButtonPressed += EditMapOptionsUI_OnRotateButtonPressed;
-    }
-
-    private void EditMapOptionsUI_OnRotateButtonPressed(object sender, EventArgs e) {
-        movementManager.RotateObject();
     }
 
     public PolygonCollider2D GetCollider() {
