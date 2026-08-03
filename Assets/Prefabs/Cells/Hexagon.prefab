@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 489894653217816922}
   - component: {fileID: 5267170436304637246}
   - component: {fileID: 1792451394081208362}
+  - component: {fileID: 6213560993355369615}
   m_Layer: 0
   m_Name: Hexagon
   m_TagString: Untagged
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
   cellSelectionButton: {fileID: 4708573436522185238}
+  waitingTimerMax: 0.5
 --- !u!114 &5267170436304637246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +380,18 @@ MonoBehaviour:
   - {fileID: 3934963382287064390}
   - {fileID: 369571678078228798}
   cellCenter: {fileID: 4620787317310861377}
+--- !u!114 &6213560993355369615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380939622138792291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01af2c1b7524443834b8e258e46c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaitingTimer
 --- !u!1 &4692555488962576844
 GameObject:
   m_ObjectHideFlags: 0

@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 9097037596674666874}
   - component: {fileID: 8802922283655430344}
   - component: {fileID: 5095068124714722263}
+  - component: {fileID: 321099348596871161}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -647,6 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
   cellSelectionButton: {fileID: 2718217719306848688}
+  waitingTimerMax: 0.5
 --- !u!114 &8802922283655430344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,3 +687,15 @@ MonoBehaviour:
   - {fileID: 2549182646048634115}
   - {fileID: 169504033042962734}
   cellCenter: {fileID: 6061537144843736617}
+--- !u!114 &321099348596871161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9222071674441464616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01af2c1b7524443834b8e258e46c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaitingTimer

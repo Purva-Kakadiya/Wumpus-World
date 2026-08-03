@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5674897884642493431}
   - component: {fileID: 6203609035378724309}
   - component: {fileID: 4808971427599715431}
+  - component: {fileID: 6565423424608471981}
   m_Layer: 5
   m_Name: Square
   m_TagString: Untagged
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Square
   cellSelectionButton: {fileID: 2561813798754633756}
+  waitingTimerMax: 0.5
 --- !u!114 &6203609035378724309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +206,18 @@ MonoBehaviour:
   - {fileID: 5143209857129459019}
   - {fileID: 7820395471596563820}
   cellCenter: {fileID: 5781443974103935707}
+--- !u!114 &6565423424608471981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071208822329600580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01af2c1b7524443834b8e258e46c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaitingTimer
 --- !u!1 &2368318709892648681
 GameObject:
   m_ObjectHideFlags: 0
