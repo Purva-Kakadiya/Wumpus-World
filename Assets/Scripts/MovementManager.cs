@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,6 +7,7 @@ public class MovementManager : MonoBehaviour {
 
     [SerializeField] private float moveDistance = 0.15f;
     [SerializeField] private Vector3 rotationAngle = new Vector3(0f, 0f, 10f);
+    //[SerializeField] private Transform snapPoint;
 
     private Cell cell;
     private Vector3 moveDir;
@@ -56,12 +58,20 @@ public class MovementManager : MonoBehaviour {
         }
     }
 
-    public void GoToPoint(Vector3 movePoint) {
-        transform.position = movePoint;
+    public void GoToPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized) {
+        transform.position = cellSnapPoint;
+        float angleInRadius = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x);
+        float angleInDegree = angleInRadius * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angleInDegree);
     }
 
-    public Transform GetObjectTransform(Cell cell) {
-        return cell.transform;
+    public float GetSnapPointRotation(Vector3 boxCastDirectionNormalized) {
+        float angleInRadius = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x);
+        float angleInDegree = angleInRadius * Mathf.Rad2Deg;
+        return (angleInDegree + 30) % 360;
+    }
+
+    public void Snapping(Vector3 normalAngle) {
     }
 
 }

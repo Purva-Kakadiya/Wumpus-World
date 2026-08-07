@@ -6,12 +6,14 @@ public class Cell : MonoBehaviour {
 
     [SerializeField] private Button cellSelectionButton;
     [SerializeField] private float waitingTimerMax = 0.5f;
+    [SerializeField] private Transform snappedVisual;
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
     private WaitingTimer waitingTimer;
     private BoxCastManager boxCastManager;
     private bool isWaiting = false;
+    private bool isSnappedVisualActive = false;
 
     private void Awake() {
 
@@ -30,6 +32,13 @@ public class Cell : MonoBehaviour {
             movementManager.enabled = false;
             boxCastManager.enabled = false;
         }
+
+        //if(isSnappedVisualActive) {
+        //    if (boxCastManager.IsSnappingActive() == false) {
+        //        ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
+        //        isSnappedVisualActive = false;
+        //    }
+        //}
     }
 
     public Transform GetTransform(Cell cell) {
@@ -57,10 +66,18 @@ public class Cell : MonoBehaviour {
         return polygonCollider;
     }
 
-    public void SnapAtPoint(Vector3 snapPoint) {
-        movementManager.GoToPoint(snapPoint);
-        waitingTimer.WaitFor(waitingTimerMax);
-        isWaiting = true;
+    public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized) {
+        float snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
+        ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
+        isSnappedVisualActive = true;
+
+        //movementManager.GoToPoint(cellSnapPoint, boxCastDirectionNormalized);
+        //waitingTimer.WaitFor(waitingTimerMax);
+        //isWaiting = true;
+    }
+
+    public void SetSnapVisualInactive() {
+        ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
     }
 
     public void ActivateCellMovement() {
