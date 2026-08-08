@@ -12,7 +12,7 @@ public class BoxCastManager : MonoBehaviour {
     [SerializeField] private Transform cellCenter;
 
     private Cell cell;
-    private Cell lastCell;
+    private Cell lastHitCell;
     private PolygonCollider2D polygonCollider;
     private bool isSnapped = false;
 
@@ -25,9 +25,13 @@ public class BoxCastManager : MonoBehaviour {
         if(!cell.IsObjectSelected()) {
             ActivateBoxCast();
         }
-        if(isSnapped == false && lastCell != null) {
-            lastCell.SetSnapVisualInactive();
+
+        if (lastHitCell != null) {
+            if (isSnapped == false) {
+                lastHitCell.SetSnapVisualInactive();
+            }
         }
+        
     }
         
 
@@ -46,13 +50,23 @@ public class BoxCastManager : MonoBehaviour {
                         Vector2 targetColliderCenter = targetCollider2D.bounds.center;
 
                         isSnapped = true;
-                        lastCell = targetCell;
-                        targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized);
-                        //targetCell.SnapAtPoint(boxCastOriginGlobalPoint + (boxCastDirectionNormalized * targetCollider2D.bounds.extents) + (boxCastDirectionNormalized * distanceBetweenCell));
+                        SetLastBoxCastHitCell(targetCell);
+                        targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
+                        return;
+                    } else {
+                        isSnapped = false;
                     }
+                } else {
+                    isSnapped = false;
                 }
+            } else {
+                isSnapped = false;
             }
         }
+    }
+
+    private void SetLastBoxCastHitCell(Cell lastHitCell) {
+        this.lastHitCell = lastHitCell;
     }
 
     public bool IsSnappingActive() {

@@ -7,6 +7,7 @@ public class Cell : MonoBehaviour {
     [SerializeField] private Button cellSelectionButton;
     [SerializeField] private float waitingTimerMax = 0.5f;
     [SerializeField] private Transform snappedVisual;
+    [SerializeField] private Transform movingCellDoor;
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
@@ -14,6 +15,9 @@ public class Cell : MonoBehaviour {
     private BoxCastManager boxCastManager;
     private bool isWaiting = false;
     private bool isSnappedVisualActive = false;
+
+    private Transform lastCellTransform;
+    private Transform boxCastOriginPoint;
 
     private void Awake() {
 
@@ -66,10 +70,11 @@ public class Cell : MonoBehaviour {
         return polygonCollider;
     }
 
-    public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized) {
+    public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint) {
         float snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
         ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
         isSnappedVisualActive = true;
+        this.boxCastOriginPoint = boxCastOriginPoint;
 
         //movementManager.GoToPoint(cellSnapPoint, boxCastDirectionNormalized);
         //waitingTimer.WaitFor(waitingTimerMax);
@@ -78,10 +83,28 @@ public class Cell : MonoBehaviour {
 
     public void SetSnapVisualInactive() {
         ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
+        isSnappedVisualActive = false;
     }
 
     public void ActivateCellMovement() {
+        lastCellTransform = gameObject.transform;
         SelectionManager.Instance.SetActiveObject(gameObject);
+        EditMapOptionsUI.Instance.SetConfirmPanelActive(this);
+    }
+
+    public void LastActionConfirmed() {
+        if(isSnappedVisualActive) {
+            Transform newCellTransform = ShowSnappedVisual.Instance.GetSnappedVisualTransform();
+            movementManager.MoveCellTo(newCellTransform);
+        }
+        SelectionManager.Instance.SetActiveObject(null);
+
+        RoutingManager.Instance.SetRountePair(movingCellDoor, boxCastOriginPoint);
+    }
+
+    public void LastActionCanceled() {
+        movementManager.MoveCellTo(lastCellTransform);
+        SelectionManager.Instance.SetActiveObject(null);
     }
 
     public void DeactivateCellMovement() {

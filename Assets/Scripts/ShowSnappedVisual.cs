@@ -5,7 +5,8 @@ public class ShowSnappedVisual : MonoBehaviour {
 
     public static ShowSnappedVisual Instance { get; private set; }
 
-    private Vector3 snapPoint;
+    [SerializeField] private Transform visualSnapPoint;
+
     private bool isSnappedVisual = false;
 
     private void Awake() {
@@ -18,16 +19,22 @@ public class ShowSnappedVisual : MonoBehaviour {
         //}
     }
 
-    public void SetSnapVisualActive(Vector3 snapPoint) {
-        isSnappedVisual = true;
-        this.snapPoint = snapPoint;
-    }
+    //public void SetSnapVisualActive(Vector3 snapPoint) {
+    //    isSnappedVisual = true;
+    //    this.snapPoint = snapPoint;
+    //}
 
     public void ShowSnapVisual(Vector3 snapPoint, float snapPointRotation, Transform snappedVisual) {
-        Debug.Log("Show snap Visual at: " + snapPoint);
         snappedVisual.transform.position = snapPoint;
         snappedVisual.rotation = Quaternion.Euler(0f, 0f, snapPointRotation);
         snappedVisual.gameObject.SetActive(true);
+
+        visualSnapPoint.transform.position = snapPoint;
+        visualSnapPoint.transform.rotation = snappedVisual.rotation;
+    }
+
+    public Transform GetSnappedVisualTransform() {
+        return visualSnapPoint;
     }
 
     public void SetSnapVisualInactive(Transform snappedVisual) {

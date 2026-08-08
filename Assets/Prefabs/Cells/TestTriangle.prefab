@@ -408,6 +408,8 @@ Transform:
   - {fileID: 1172110576947108871}
   - {fileID: 3878004594233198428}
   - {fileID: 5533270809852314880}
+  - {fileID: 8056931316430344974}
+  - {fileID: 5598627880127546405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &6854683298026486726
@@ -476,6 +478,7 @@ MonoBehaviour:
   cellSelectionButton: {fileID: 3077823670241401361}
   waitingTimerMax: 0.5
   snappedVisual: {fileID: 4211543587665412038}
+  movingCellDoor: {fileID: 5598627880127546405}
 --- !u!114 &5551829808422627431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ef7b4e1928a674f911bd6d4db12ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowSnappableVisual
+  visualSnapPoint: {fileID: 8056931316430344974}
 --- !u!1 &2734172648451891040
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4211543587665412038
 Transform:
   m_ObjectHideFlags: 0
@@ -783,6 +787,68 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.6, y: -1.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8988599877064152457}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6201027918106690077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8056931316430344974}
+  m_Layer: 3
+  m_Name: VisualSnapPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8056931316430344974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6201027918106690077}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8988599877064152457}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6591017711033178829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5598627880127546405}
+  m_Layer: 3
+  m_Name: MovingCellDoor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5598627880127546405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6591017711033178829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: -0.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

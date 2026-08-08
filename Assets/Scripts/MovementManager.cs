@@ -71,6 +71,11 @@ public class MovementManager : MonoBehaviour {
         return (angleInDegree + 30) % 360;
     }
 
+    public void MoveCellTo(Transform targetTransform) {
+        transform.position = targetTransform.position;
+        transform.rotation = targetTransform.rotation;
+    }
+
     public void Snapping(Vector3 normalAngle) {
     }
 

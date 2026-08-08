@@ -23,6 +23,7 @@ public class EditMapOptionsUI : MonoBehaviour {
 
     private int spawnLayerValueInInt;
     private Cell lastSpawnedCell;
+    private Cell callerCell = null;
 
 
     private void Awake() {
@@ -54,7 +55,12 @@ public class EditMapOptionsUI : MonoBehaviour {
         });
 
         cancelButton.onClick.AddListener(() => {
-            DestroyCell();
+            if (callerCell == null) {
+                DestroyCell();
+            } else {
+                callerCell.LastActionCanceled();
+                callerCell = null;
+            }
             confirmPanel.gameObject.SetActive(false);
         });
 
@@ -62,10 +68,15 @@ public class EditMapOptionsUI : MonoBehaviour {
     }
 
     private void OnConfirmPressed() {
-        confirmPanel.gameObject.SetActive(false);
 
-        Transform updatedTransform = lastSpawnedCell.GetTransform(lastSpawnedCell);
-        lastSpawnedCell = null;
+        if (callerCell == null) {
+            Transform updatedTransform = lastSpawnedCell.GetTransform(lastSpawnedCell);
+            lastSpawnedCell = null;
+        } else {
+            callerCell.LastActionConfirmed();
+            callerCell = null;
+        }
+        confirmPanel.gameObject.SetActive(false);
     }
 
     private void SpawnTheCell(Cell cell) {
@@ -77,6 +88,11 @@ public class EditMapOptionsUI : MonoBehaviour {
         cell.ActivateCellMovement();
 
         lastSpawnedCell = cell;
+    }
+
+    public void SetConfirmPanelActive(Cell callerCell) {
+        confirmPanel.gameObject.SetActive(true);
+        this.callerCell = callerCell;
     }
 
     private void DestroyCell() {
