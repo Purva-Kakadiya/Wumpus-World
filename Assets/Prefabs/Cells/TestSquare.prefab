@@ -890,8 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89ff400625584344a09c27a28d15d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
-  boxCastLength: 0.1
-  boxCastWidth: 0.1
+  boxCastLength: 0.2
+  boxCastWidth: 0.5
   extraDistance: 0.1
   distanceBetweenCell: 0.2
   castHitLayer:

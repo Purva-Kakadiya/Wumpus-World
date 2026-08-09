@@ -402,8 +402,8 @@ Transform:
   - {fileID: 4211543587665412038}
   - {fileID: 1590849269854749162}
   - {fileID: 3608034615856802292}
-  - {fileID: 556002795668991010}
   - {fileID: 1924890662190295038}
+  - {fileID: 556002795668991010}
   - {fileID: 6345905506683379220}
   - {fileID: 1172110576947108871}
   - {fileID: 3878004594233198428}
@@ -504,8 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89ff400625584344a09c27a28d15d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
-  boxCastLength: 0.1
-  boxCastWidth: 0.1
+  boxCastLength: 0.2
+  boxCastWidth: 0.5
   extraDistance: 0.1
   distanceBetweenCell: 0.2
   castHitLayer:
@@ -513,8 +513,8 @@ MonoBehaviour:
     m_Bits: 8
   boxCastOriginPointsArray:
   - {fileID: 3608034615856802292}
-  - {fileID: 556002795668991010}
   - {fileID: 1924890662190295038}
+  - {fileID: 556002795668991010}
   cellSnapPointsArray:
   - {fileID: 6345905506683379220}
   - {fileID: 1172110576947108871}
@@ -739,7 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 556002795668991010}
   m_Layer: 3
-  m_Name: BoxCastPoint2
+  m_Name: BoxCastPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -894,7 +894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924890662190295038}
   m_Layer: 3
-  m_Name: BoxCastPoint3
+  m_Name: BoxCastPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

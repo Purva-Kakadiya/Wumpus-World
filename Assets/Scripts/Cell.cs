@@ -45,6 +45,10 @@ public class Cell : MonoBehaviour {
         //}
     }
 
+    //public bool IsSnappingVisualActive() {
+    //    return isSnappedVisualActive;
+    //}
+
     public Transform GetTransform(Cell cell) {
         //Transform cellTransform = movementManager.GetObjectTransform(cell);
         //return cellTransform;
@@ -72,6 +76,8 @@ public class Cell : MonoBehaviour {
 
     public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint) {
         float snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
+
+        Debug.Log("snapping at: " + cellSnapPoint + " with rotation: " + snapPointRotation);
         ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
         isSnappedVisualActive = true;
         this.boxCastOriginPoint = boxCastOriginPoint;
@@ -92,7 +98,7 @@ public class Cell : MonoBehaviour {
         EditMapOptionsUI.Instance.SetConfirmPanelActive(this);
     }
 
-    public void LastActionConfirmed() {
+    public void CellMovementConfirmed() {
         if(isSnappedVisualActive) {
             Transform newCellTransform = ShowSnappedVisual.Instance.GetSnappedVisualTransform();
             movementManager.MoveCellTo(newCellTransform);
@@ -105,7 +111,7 @@ public class Cell : MonoBehaviour {
 
     }
 
-    public void LastActionCanceled() {
+    public void CellMovementCanceled() {
         movementManager.MoveCellTo(lastCellTransform);
         SelectionManager.Instance.SetActiveObject(null);
     }

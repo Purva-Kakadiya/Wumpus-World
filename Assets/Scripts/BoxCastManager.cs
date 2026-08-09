@@ -15,6 +15,7 @@ public class BoxCastManager : MonoBehaviour {
     private Cell lastHitCell;
     private PolygonCollider2D polygonCollider;
     private bool isSnapped = false;
+    private bool atleastOneBoxCastHit = false;
 
     private void Awake() {
         cell = GetComponent<Cell>();
@@ -27,12 +28,12 @@ public class BoxCastManager : MonoBehaviour {
         }
 
         if (lastHitCell != null) {
-            if (isSnapped == false) {
+            if (atleastOneBoxCastHit == false) {
                 lastHitCell.SetSnapVisualInactive();
                 lastHitCell = null;
             }
         }
-        
+
     }
         
 
@@ -56,6 +57,7 @@ public class BoxCastManager : MonoBehaviour {
                         Vector2 targetColliderCenter = targetCollider2D.bounds.center;
 
                         isSnapped = true;
+                        atleastOneBoxCastHit = true;
                         SetLastBoxCastHitCell(targetCell);
                         targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
                         return;
@@ -69,6 +71,8 @@ public class BoxCastManager : MonoBehaviour {
                 isSnapped = false;
             }
         }
+
+        atleastOneBoxCastHit = atleastOneBoxCastHit || isSnapped;
     }
 
     private void SetLastBoxCastHitCell(Cell lastHitCell) {

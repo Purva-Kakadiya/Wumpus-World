@@ -27,7 +27,7 @@ public class RoutingManager : MonoBehaviour {
 
     private void Update() {
         foreach((Transform door1, Transform door2) pair in routePairList) {
-            //Debug.Log("door1 is: " + pair.door1.name + " door2 is: " + pair.door2.name);
+            Debug.Log("door1 is: " + pair.door1.name + " door2 is: " + pair.door2.name);
         }
     }
 

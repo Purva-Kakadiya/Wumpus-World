@@ -55,10 +55,10 @@ public class EditMapOptionsUI : MonoBehaviour {
         });
 
         cancelButton.onClick.AddListener(() => {
-            if (callerCell == null) {
+            if (callerCell == lastSpawnedCell) {
                 DestroyCell();
             } else {
-                callerCell.LastActionCanceled();
+                callerCell.CellMovementCanceled();
                 callerCell = null;
             }
             confirmPanel.gameObject.SetActive(false);
@@ -69,11 +69,14 @@ public class EditMapOptionsUI : MonoBehaviour {
 
     private void OnConfirmPressed() {
 
-        if (callerCell == null) {
+        if (lastSpawnedCell == callerCell) {
             Transform updatedTransform = lastSpawnedCell.GetTransform(lastSpawnedCell);
+            lastSpawnedCell.CellMovementConfirmed();
+
             lastSpawnedCell = null;
+
         } else {
-            callerCell.LastActionConfirmed();
+            callerCell.CellMovementConfirmed();
             callerCell = null;
         }
         confirmPanel.gameObject.SetActive(false);
