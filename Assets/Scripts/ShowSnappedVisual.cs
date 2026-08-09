@@ -27,7 +27,7 @@ public class ShowSnappedVisual : MonoBehaviour {
     public void ShowSnapVisual(Vector3 snapPoint, float snapPointRotation, Transform snappedVisual) {
         snappedVisual.transform.position = snapPoint;
         snappedVisual.rotation = Quaternion.Euler(0f, 0f, snapPointRotation);
-        Debug.Log(snappedVisual.gameObject.activeSelf);
+        snappedVisual.gameObject.SetActive(true);
 
         visualSnapPoint.transform.position = snapPoint;
         visualSnapPoint.transform.rotation = snappedVisual.rotation;

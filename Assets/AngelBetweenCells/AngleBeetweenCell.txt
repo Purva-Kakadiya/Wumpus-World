@@ -1,5 +1,7 @@
 angle between cells:
 
-Square -> Triangle          Square boxCastDirection + 30 degrees for triangle rotation
-Square -> Square            1.7
-Triangle -> Triangle        Triangle boxCastDirection + 30 degrees for triangle rotation
+Moving cell
+
+Triangle                  rotate it by 30 degrees of boxCastDirection
+Square                    don't rotate it from boxCastDirection
+Hexagon                   rotate it by 30 degrees of boxCastDirection

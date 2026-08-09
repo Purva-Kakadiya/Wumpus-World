@@ -26,9 +26,7 @@ public class MathCalaculation : MonoBehaviour {
         float.TryParse(inputFieldPoint2x.text, out point2.x);
         float.TryParse(inputFieldPoint2y.text, out point2.y);
 
-        Vector2 direction = point1 - point2;
-        float angleInRadius = Mathf.Atan2(direction.y, direction.x);
-        float angleInDegree = angleInRadius * Mathf.Rad2Deg;
+        float angleInDegree = point1.x * Mathf.Rad2Deg;
         angleText.text = angleInDegree.ToString();
     }
 

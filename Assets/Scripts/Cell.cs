@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Cell : MonoBehaviour {
@@ -8,6 +10,7 @@ public class Cell : MonoBehaviour {
     [SerializeField] private float waitingTimerMax = 0.5f;
     [SerializeField] private Transform snappedVisual;
     [SerializeField] private Transform movingCellDoor;
+    [SerializeField] private List<Transform> doorSnappedList = new List<Transform>();
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
@@ -77,7 +80,6 @@ public class Cell : MonoBehaviour {
     public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint) {
         float snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
 
-        Debug.Log("snapping at: " + cellSnapPoint + " with rotation: " + snapPointRotation);
         ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
         isSnappedVisualActive = true;
         this.boxCastOriginPoint = boxCastOriginPoint;
@@ -93,6 +95,9 @@ public class Cell : MonoBehaviour {
     }
 
     public void ActivateCellMovement() {
+        if(doorSnappedList.Count != 0) {
+            doorSnappedList.Clear();
+        }
         lastCellTransform = gameObject.transform;
         SelectionManager.Instance.SetActiveObject(gameObject);
         EditMapOptionsUI.Instance.SetConfirmPanelActive(this);
@@ -105,6 +110,7 @@ public class Cell : MonoBehaviour {
             ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
             isSnappedVisualActive = false;
 
+            doorSnappedList.Add(movingCellDoor);
             RoutingManager.Instance.SetRountePair(movingCellDoor, boxCastOriginPoint);
         }
         SelectionManager.Instance.SetActiveObject(null);

@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class MovementManager : MonoBehaviour {
 
     [SerializeField] private float moveDistance = 0.15f;
-    [SerializeField] private Vector3 rotationAngle = new Vector3(0f, 0f, 10f);
+    [SerializeField] private float rotateAngleFromBoxCastDirection;
     //[SerializeField] private Transform snapPoint;
 
     private Cell cell;
@@ -51,11 +51,11 @@ public class MovementManager : MonoBehaviour {
             moveRequested = false;
         }
 
-        if(rotationRequested) {
-            //transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.z + 10f);
-            transform.Rotate(rotationAngle);
-            rotationRequested = false;
-        }
+        //if(rotationRequested) {
+        //    //transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.z + 10f);
+        //    transform.Rotate(rotationAngle);
+        //    rotationRequested = false;
+        //}
     }
 
     public void GoToPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized) {
@@ -66,9 +66,10 @@ public class MovementManager : MonoBehaviour {
     }
 
     public float GetSnapPointRotation(Vector3 boxCastDirectionNormalized) {
-        float angleInRadius = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x);
-        float angleInDegree = angleInRadius * Mathf.Rad2Deg;
-        return (angleInDegree + 30) % 360;
+        float angleInDegree = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x) * Mathf.Rad2Deg;
+        Debug.Log("rotation angle is: " + angleInDegree);
+
+        return (angleInDegree + rotateAngleFromBoxCastDirection) % 360;
     }
 
     public void MoveCellTo(Transform targetTransform) {

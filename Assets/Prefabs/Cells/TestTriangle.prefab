@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_AnchoredPosition: {x: 0, y: -0.47}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1336705597568669446
@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 296936044544790818}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -478,6 +478,7 @@ MonoBehaviour:
   waitingTimerMax: 0.5
   snappedVisual: {fileID: 4211543587665412038}
   movingCellDoor: {fileID: 1924890662190295038}
+  doorSnappedList: []
 --- !u!114 &5551829808422627431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementManager
   moveDistance: 0.15
-  rotationAngle: {x: 0, y: 0, z: 10}
+  rotateAngleFromBoxCastDirection: 30
 --- !u!114 &6051733920779826287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,8 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89ff400625584344a09c27a28d15d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
-  boxCastLength: 0.2
-  boxCastWidth: 0.5
+  boxCastLength: 0.1
+  boxCastWidth: 0.1
   extraDistance: 0.1
   distanceBetweenCell: 0.2
   castHitLayer:
@@ -555,12 +556,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4211543587665412038}
   m_Layer: 3
-  m_Name: TriangleSnapVisual
+  m_Name: TriangleVisualSnapped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4211543587665412038
 Transform:
   m_ObjectHideFlags: 0
@@ -602,7 +603,7 @@ Transform:
   m_GameObject: {fileID: 4653199152959032568}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -668,7 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -707,9 +708,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.011942387, g: 0, b: 1, a: 1}
-    m_SelectedColor: {r: 0.32966232, g: 1, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.078431375, a: 1}
+    m_PressedColor: {r: 0.078431375, g: 0.078431375, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.3137255, g: 0.78431374, b: 0.078431375, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -754,7 +755,7 @@ Transform:
   m_GameObject: {fileID: 5161790710597689117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.966, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -785,7 +786,7 @@ Transform:
   m_GameObject: {fileID: 6137233288788222788}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: -1.06, z: 0}
+  m_LocalPosition: {x: -0.5863, y: -1.016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -847,7 +848,7 @@ Transform:
   m_GameObject: {fileID: 7249754216331632434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: -0.56, z: 0}
+  m_LocalPosition: {x: 0.25, y: -0.533, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -878,7 +879,7 @@ Transform:
   m_GameObject: {fileID: 7357592563834621822}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -1.06, z: 0}
+  m_LocalPosition: {x: 0.5863, y: -1.016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -909,7 +910,7 @@ Transform:
   m_GameObject: {fileID: 8492484864724141690}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: -0.56, z: 0}
+  m_LocalPosition: {x: -0.25, y: -0.533, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -941,7 +942,7 @@ Transform:
   m_GameObject: {fileID: 8514993273652661943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -997,7 +998,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.85660374, g: 0.19233169, b: 0.19233169, a: 1}
+  m_Color: {r: 0.8627451, g: 0.21568628, b: 0.21568628, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
