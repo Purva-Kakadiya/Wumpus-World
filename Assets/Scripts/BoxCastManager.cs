@@ -29,6 +29,7 @@ public class BoxCastManager : MonoBehaviour {
         if (lastHitCell != null) {
             if (isSnapped == false) {
                 lastHitCell.SetSnapVisualInactive();
+                lastHitCell = null;
             }
         }
         
@@ -37,6 +38,11 @@ public class BoxCastManager : MonoBehaviour {
 
     private void ActivateBoxCast() {
         for (int i = 0; i < boxCastOriginPointsArray.Length; i++) {
+
+            if (cell.BoxCastInRouteManager(boxCastOriginPointsArray[i])) {
+                continue;
+            }
+
             Vector2 boxCastOriginGlobalPoint = boxCastOriginPointsArray[i].position;
             Vector2 boxCastSize = new Vector2(boxCastLength, boxCastWidth);
             Vector2 boxCastDirectionNormalized = (boxCastOriginGlobalPoint - (Vector2)cellCenter.position).normalized;

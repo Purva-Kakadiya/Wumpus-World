@@ -1,0 +1,5 @@
+angle between cells:
+
+Square -> Triangle          Square boxCastDirection + 30 degrees for triangle rotation
+Square -> Square            1.7
+Triangle -> Triangle        1.073

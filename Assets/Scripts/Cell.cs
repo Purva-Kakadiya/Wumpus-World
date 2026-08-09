@@ -96,15 +96,25 @@ public class Cell : MonoBehaviour {
         if(isSnappedVisualActive) {
             Transform newCellTransform = ShowSnappedVisual.Instance.GetSnappedVisualTransform();
             movementManager.MoveCellTo(newCellTransform);
+            ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
+            isSnappedVisualActive = false;
+
+            RoutingManager.Instance.SetRountePair(movingCellDoor, boxCastOriginPoint);
         }
         SelectionManager.Instance.SetActiveObject(null);
 
-        RoutingManager.Instance.SetRountePair(movingCellDoor, boxCastOriginPoint);
     }
 
     public void LastActionCanceled() {
         movementManager.MoveCellTo(lastCellTransform);
         SelectionManager.Instance.SetActiveObject(null);
+    }
+
+    public bool BoxCastInRouteManager(Transform boxCastOriginPoint) {
+        if (RoutingManager.Instance.IsDoorInRoutePair(boxCastOriginPoint)) {
+            return true;
+        }
+        return false;
     }
 
     public void DeactivateCellMovement() {
