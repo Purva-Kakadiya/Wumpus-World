@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 6051733920779826287}
   - component: {fileID: 5952718686284342207}
   - component: {fileID: 7351667219000813822}
+  - component: {fileID: 6594030269833537690}
   m_Layer: 3
   m_Name: TestTriangle
   m_TagString: Untagged
@@ -546,6 +547,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowSnappableVisual
   visualSnapPoint: {fileID: 8056931316430344974}
+--- !u!114 &6594030269833537690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2513640652502244554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
 --- !u!1 &2734172648451891040
 GameObject:
   m_ObjectHideFlags: 0

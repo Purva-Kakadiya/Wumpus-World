@@ -762,6 +762,7 @@ GameObject:
   - component: {fileID: 5863690661885080627}
   - component: {fileID: 8968456323562166733}
   - component: {fileID: 7394225644142741849}
+  - component: {fileID: 1604518427530809938}
   m_Layer: 3
   m_Name: TestSquare
   m_TagString: Untagged
@@ -934,6 +935,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowSnappedVisual
   visualSnapPoint: {fileID: 4737292986306394279}
+--- !u!114 &1604518427530809938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915444985522295124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
 --- !u!1 &8525326794425440820
 GameObject:
   m_ObjectHideFlags: 0

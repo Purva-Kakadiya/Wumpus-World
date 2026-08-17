@@ -67,7 +67,6 @@ public class MovementManager : MonoBehaviour {
 
     public float GetSnapPointRotation(Vector3 boxCastDirectionNormalized) {
         float angleInDegree = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x) * Mathf.Rad2Deg;
-        Debug.Log("rotation angle is: " + angleInDegree);
 
         return (angleInDegree + rotateAngleFromBoxCastDirection) % 360;
     }

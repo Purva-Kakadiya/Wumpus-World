@@ -4,39 +4,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-//[System.Serializable]
-//public struct RoutePair {
-//    private Transform door1;
-//    private Transform door2;
+[System.Serializable]
+public struct RoutePair {
+    public Transform door;
+    public Transform outerDoor;
 
-//    public RoutePair(Transform door1, Transform door2) {
-//        this.door1 = door1;
-//        this.door2 = door2;
-//    }
-//}
+    public RoutePair(Transform door, Transform outerDoor) {
+        this.door = door;
+        this.outerDoor = outerDoor;
+    }
+}
 
 public class RoutingManager : MonoBehaviour {
 
-    public static RoutingManager Instance { get; private set; }
+    //public static RoutingManager Instance { get; private set; }
 
-    [SerializeField] private List<(Transform door1, Transform door2)> routePairList = new List<(Transform, Transform)>();
+    [SerializeField] private List<RoutePair> routePairList = new List<RoutePair>();
+    private Dictionary<Transform, Transform> routePairs = new Dictionary<Transform, Transform>();
 
     private void Awake() {
-        Instance = this;
+        //Instance = this;
     }
 
     private void Update() {
-        foreach((Transform door1, Transform door2) pair in routePairList) {
-            //Debug.Log("door1 is: " + pair.door1.name + " door2 is: " + pair.door2.name);
-        }
+        //foreach(RoutePair pair in routePairList) {
+        //    Debug.Log("InnerDoor is: " + pair.door.name + " OuterDoor is: " + pair.outerDoor.name);
+        //}
+        //foreach(Transform door in routePairs.Keys) {
+        //    Debug.Log("door1 is: " + door.parent.name + ":" + door.name + " & door2 is: " + routePairs[door].parent.name + ":" + routePairs[door].name);
+        //}
     }
 
-    public void SetRountePair(Transform door1, Transform door2) {
-        routePairList.Add((door1, door2));
+    public void SetRountePair(Transform door, Transform outerDoor) {
+        routePairs[door] = outerDoor;
+        routePairList.Add(new RoutePair(door, outerDoor));
     }
 
     public bool IsDoorInRoutePair(Transform door) {
-        if(routePairList.Any(pair => pair.door1 == door || pair.door2 == door)) {
+        if (routePairs.ContainsKey(door)) {
             return true;
         }
         return false;

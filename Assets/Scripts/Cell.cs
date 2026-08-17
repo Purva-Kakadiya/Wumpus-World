@@ -10,14 +10,16 @@ public class Cell : MonoBehaviour {
     [SerializeField] private float waitingTimerMax = 0.5f;
     [SerializeField] private Transform snappedVisual;
     [SerializeField] private Transform movingCellDoor;
-    [SerializeField] private List<Transform> doorSnappedList = new List<Transform>();
+    //[SerializeField] private List<Transform> doorSnappedList = new List<Transform>();
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
     private WaitingTimer waitingTimer;
     private BoxCastManager boxCastManager;
+    private RoutingManager routingManager;
     private bool isWaiting = false;
     private bool isSnappedVisualActive = false;
+
 
     private Transform lastCellTransform;
     private Transform boxCastOriginPoint;
@@ -28,6 +30,7 @@ public class Cell : MonoBehaviour {
         movementManager = GetComponent<MovementManager>();
         waitingTimer = GetComponent<WaitingTimer>();
         boxCastManager = GetComponent<BoxCastManager>();
+        routingManager = GetComponent<RoutingManager>();
 
         cellSelectionButton.onClick.AddListener(() => {
             ActivateCellMovement();
@@ -95,9 +98,9 @@ public class Cell : MonoBehaviour {
     }
 
     public void ActivateCellMovement() {
-        if(doorSnappedList.Count != 0) {
-            doorSnappedList.Clear();
-        }
+        //if(doorSnappedList.Count != 0) {
+        //    doorSnappedList.Clear();
+        //}
         lastCellTransform = gameObject.transform;
         SelectionManager.Instance.SetActiveObject(gameObject);
         EditMapOptionsUI.Instance.SetConfirmPanelActive(this);
@@ -110,11 +113,20 @@ public class Cell : MonoBehaviour {
             ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
             isSnappedVisualActive = false;
 
-            doorSnappedList.Add(movingCellDoor);
-            RoutingManager.Instance.SetRountePair(movingCellDoor, boxCastOriginPoint);
+            SetRouting(movingCellDoor, boxCastOriginPoint);
+
+            GameObject castingObject = boxCastOriginPoint.parent.gameObject;
+            Cell boxCastingCell = castingObject.GetComponent<Cell>();
+            boxCastingCell.SetRouting(boxCastOriginPoint, movingCellDoor);
+
+            //doorSnappedList.Add(movingCellDoor);
         }
         SelectionManager.Instance.SetActiveObject(null);
 
+    }
+
+    private void SetRouting(Transform movingCellDoor, Transform boxCastOriginPoint) {
+        routingManager.SetRountePair(movingCellDoor, boxCastOriginPoint);
     }
 
     public void CellMovementCanceled() {
@@ -123,7 +135,7 @@ public class Cell : MonoBehaviour {
     }
 
     public bool BoxCastInRouteManager(Transform boxCastOriginPoint) {
-        if (RoutingManager.Instance.IsDoorInRoutePair(boxCastOriginPoint)) {
+        if (routingManager.IsDoorInRoutePair(boxCastOriginPoint)) {
             return true;
         }
         return false;
