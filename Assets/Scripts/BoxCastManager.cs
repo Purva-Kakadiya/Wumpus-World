@@ -60,6 +60,9 @@ public class BoxCastManager : MonoBehaviour {
                         lastHitCell = targetCell;
                         targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
                         return;
+                    } else {
+                        //Debug.Log("boxCast cell is: " + transform.name + " hit cell is: " + targetCell.name);
+                        targetCell.SetRoute(boxCastDirectionNormalized, boxCastOriginPointsArray[i], cell);
                     }
                 }
             }
@@ -74,6 +77,10 @@ public class BoxCastManager : MonoBehaviour {
 
     public bool IsSnappingActive() {
         return isSnapped;
+    }
+
+    public Transform GetBoxCastOriginPoint(int index) {
+        return boxCastOriginPointsArray[index];
     }
 
 }

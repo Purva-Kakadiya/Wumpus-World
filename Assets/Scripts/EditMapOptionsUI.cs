@@ -18,7 +18,7 @@ public class EditMapOptionsUI : MonoBehaviour {
     [SerializeField] private Cell square;
     [SerializeField] private Cell triangle;
     [SerializeField] private Cell hexagon;
-    [SerializeField] private Transform customMap;
+    [SerializeField] private Transform spawnLevel;
     [SerializeField] private LayerMask gridSpawnLayer;
 
     private int spawnLayerValueInInt;
@@ -86,7 +86,7 @@ public class EditMapOptionsUI : MonoBehaviour {
 
         Vector2 spawnLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        cell = Instantiate(cell, spawnLocation, Quaternion.identity, customMap);
+        cell = Instantiate(cell, spawnLocation, Quaternion.identity, spawnLevel);
         cell.gameObject.layer = spawnLayerValueInInt;
         cell.ActivateCellMovement();
 

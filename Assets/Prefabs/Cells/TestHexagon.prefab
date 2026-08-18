@@ -381,7 +381,6 @@ MonoBehaviour:
   waitingTimerMax: 0.5
   snappedVisual: {fileID: 6799898907614900720}
   movingCellDoor: {fileID: 6186886794075246848}
-  doorSnappedList: []
 --- !u!114 &2592354836615701485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
   boxCastLength: 0.1
-  boxCastWidth: 0.1
+  boxCastWidth: 0.5
   extraDistance: 0.1
   distanceBetweenCell: 0.2
   castHitLayer:
@@ -467,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
+  routePairList: []
 --- !u!1 &4361307276203714128
 GameObject:
   m_ObjectHideFlags: 0

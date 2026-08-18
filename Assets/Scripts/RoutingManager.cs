@@ -35,7 +35,7 @@ public class RoutingManager : MonoBehaviour {
         //}
     }
 
-    public void SetRountePair(Transform door, Transform outerDoor) {
+    public void SetRoutePair(Transform door, Transform outerDoor) {
         routePairs[door] = outerDoor;
         routePairList.Add(new RoutePair(door, outerDoor));
     }

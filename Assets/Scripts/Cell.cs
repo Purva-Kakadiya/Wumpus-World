@@ -81,7 +81,7 @@ public class Cell : MonoBehaviour {
     }
 
     public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint) {
-        float snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
+        int snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
 
         ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
         isSnappedVisualActive = true;
@@ -90,6 +90,44 @@ public class Cell : MonoBehaviour {
         //movementManager.GoToPoint(cellSnapPoint, boxCastDirectionNormalized);
         //waitingTimer.WaitFor(waitingTimerMax);
         //isWaiting = true;
+    }
+
+    public void SetRoute(Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint, Cell boxCastingCell) {
+
+        int doorIndex = 2;
+        int wantedRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
+        int currentRotation = GetNumInRange((int)transform.eulerAngles.z);
+
+        while (wantedRotation != currentRotation) {
+            doorIndex = doorIndex + 1;
+            if (doorIndex == 4) {
+                doorIndex = 1;
+            }
+            wantedRotation = GetNumInRange(wantedRotation - 120);
+        }
+
+        Transform innerDoor = boxCastManager.GetBoxCastOriginPoint(doorIndex - 1);
+        routingManager.SetRoutePair(innerDoor, boxCastOriginPoint);
+        boxCastingCell.SetRoutePair(boxCastOriginPoint, innerDoor);
+    }
+
+    public void SetRoutePair(Transform boxCastOriginPoint, Transform hitDoor) {
+        routingManager.SetRoutePair(boxCastOriginPoint, hitDoor);
+    }
+
+    public int GetNumInRange(int num) {
+        if(num > 180) {
+            num = num - 360;
+        }
+        if(num <= -180) {
+            num = 360 + num;
+        }
+        return num;
+    }
+
+    public int ConvertToAngle(Vector3 directionVector) {
+        float angleInDegree = Mathf.Atan2(directionVector.y, directionVector.x) * Mathf.Rad2Deg;
+        return GetNumInRange(Mathf.RoundToInt(angleInDegree));
     }
 
     public void SetSnapVisualInactive() {
@@ -126,7 +164,7 @@ public class Cell : MonoBehaviour {
     }
 
     private void SetRouting(Transform movingCellDoor, Transform boxCastOriginPoint) {
-        routingManager.SetRountePair(movingCellDoor, boxCastOriginPoint);
+        routingManager.SetRoutePair(movingCellDoor, boxCastOriginPoint);
     }
 
     public void CellMovementCanceled() {

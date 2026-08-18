@@ -9027,6 +9027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TriangleVisualSnapped
       objectReference: {fileID: 0}
+    - target: {fileID: 5161790710597689117, guid: c4bb26097c105c94c9af214922c36d9b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6937965249884514987, guid: c4bb26097c105c94c9af214922c36d9b, type: 3}
       propertyPath: m_Color.a
       value: 1

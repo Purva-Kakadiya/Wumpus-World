@@ -65,10 +65,10 @@ public class MovementManager : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0f, 0f, angleInDegree);
     }
 
-    public float GetSnapPointRotation(Vector3 boxCastDirectionNormalized) {
+    public int GetSnapPointRotation(Vector3 boxCastDirectionNormalized) {
         float angleInDegree = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x) * Mathf.Rad2Deg;
 
-        return (angleInDegree + rotateAngleFromBoxCastDirection) % 360;
+        return Mathf.RoundToInt((angleInDegree + rotateAngleFromBoxCastDirection) % 360);
     }
 
     public void MoveCellTo(Transform targetTransform) {
