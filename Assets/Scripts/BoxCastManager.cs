@@ -1,4 +1,6 @@
+using UnityEditor.Rendering;
 using UnityEngine;
+using System.Collections;
 
 public class BoxCastManager : MonoBehaviour {
 
@@ -16,6 +18,8 @@ public class BoxCastManager : MonoBehaviour {
     private PolygonCollider2D polygonCollider;
     private bool isSnapped = false;
     private bool atleastOneBoxCastHit = false;
+    private bool isBoxCastActive = false;
+
 
     private void Awake() {
         cell = GetComponent<Cell>();
@@ -23,7 +27,12 @@ public class BoxCastManager : MonoBehaviour {
     }
 
     private void Update() {
-        if(!cell.IsObjectSelected()) {
+        if(!cell.IsObjectSelected() && isBoxCastActive == false) {
+
+            StartCoroutine(WaitForFewSeconds());
+        }
+
+        if(isBoxCastActive == true) {
             ActivateBoxCast();
         }
 
@@ -34,6 +43,12 @@ public class BoxCastManager : MonoBehaviour {
             }
         }
 
+    }
+
+    IEnumerator WaitForFewSeconds() {
+        isBoxCastActive = true;
+
+        yield return new WaitForSeconds(2f);
     }
         
 

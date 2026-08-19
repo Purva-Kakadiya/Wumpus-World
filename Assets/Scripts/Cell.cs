@@ -1,4 +1,4 @@
-using NUnit.Framework;
+ using NUnit.Framework;
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,7 +10,8 @@ public class Cell : MonoBehaviour {
     [SerializeField] private float waitingTimerMax = 0.5f;
     [SerializeField] private Transform snappedVisual;
     [SerializeField] private Transform movingCellDoor;
-    //[SerializeField] private List<Transform> doorSnappedList = new List<Transform>();
+    [SerializeField] private int defaultSnapDoorNumber;
+    [SerializeField] private int numberOfDoors;
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
@@ -94,26 +95,39 @@ public class Cell : MonoBehaviour {
 
     public void SetRoute(Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint, Cell boxCastingCell) {
 
-        int doorIndex = 2;
+        int doorIndex = defaultSnapDoorNumber;
         int wantedRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
         int currentRotation = GetNumInRange((int)transform.eulerAngles.z);
+        int maxLoops = numberOfDoors;
+        //bool foundOtherDoor = false;
 
         while (wantedRotation != currentRotation) {
             doorIndex = doorIndex + 1;
-            if (doorIndex == 4) {
+            if (doorIndex > numberOfDoors) {
                 doorIndex = 1;
             }
-            wantedRotation = GetNumInRange(wantedRotation - 120);
+            wantedRotation = GetNumInRange(wantedRotation - (360 / numberOfDoors));
+            //if(wantedRotation == currentRotation) {
+            //    foundOtherDoor = true;
+            //    break;
+            //}
+            //if(maxLoops == 0) {
+            //    break;
+            //}
+            //maxLoops--;
         }
 
-        Transform innerDoor = boxCastManager.GetBoxCastOriginPoint(doorIndex - 1);
-        routingManager.SetRoutePair(innerDoor, boxCastOriginPoint);
-        boxCastingCell.SetRoutePair(boxCastOriginPoint, innerDoor);
+        //if (foundOtherDoor == true) {
+            Transform innerDoor = boxCastManager.GetBoxCastOriginPoint(doorIndex - 1);
+            Debug.Log("Added boxcast pair " + innerDoor.name + " and " + boxCastOriginPoint.name);
+            SetRouting(innerDoor, boxCastOriginPoint);
+            boxCastingCell.SetRouting(boxCastOriginPoint, innerDoor);
+        //}
     }
 
-    public void SetRoutePair(Transform boxCastOriginPoint, Transform hitDoor) {
-        routingManager.SetRoutePair(boxCastOriginPoint, hitDoor);
-    }
+    //public void SetRoutePairInPoint(Transform boxCastOriginPoint, Transform hitDoor) {
+    //    routingManager.SetRoutePair(boxCastOriginPoint, hitDoor);
+    //}
 
     public int GetNumInRange(int num) {
         if(num > 180) {

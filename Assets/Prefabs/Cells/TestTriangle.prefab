@@ -479,6 +479,9 @@ MonoBehaviour:
   waitingTimerMax: 0.5
   snappedVisual: {fileID: 4211543587665412038}
   movingCellDoor: {fileID: 1924890662190295038}
+  defaultSnapDoorNumber: 2
+  numberOfDoors: 3
+  possibleDoorsInCercle: 0
 --- !u!114 &5551829808422627431
 MonoBehaviour:
   m_ObjectHideFlags: 0
