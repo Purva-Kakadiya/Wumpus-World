@@ -24,6 +24,7 @@ public class EditMapOptionsUI : MonoBehaviour {
     private int spawnLayerValueInInt;
     private Cell lastSpawnedCell;
     private Cell callerCell = null;
+    private int spawnObjectNumber = 0;
 
 
     private void Awake() {
@@ -88,9 +89,11 @@ public class EditMapOptionsUI : MonoBehaviour {
 
         cell = Instantiate(cell, spawnLocation, Quaternion.identity, spawnLevel);
         cell.gameObject.layer = spawnLayerValueInInt;
+        cell.gameObject.name = $"Cell{spawnObjectNumber}";
         cell.ActivateCellMovement();
 
         lastSpawnedCell = cell;
+        spawnObjectNumber++;
     }
 
     public void SetConfirmPanelActive(Cell callerCell) {

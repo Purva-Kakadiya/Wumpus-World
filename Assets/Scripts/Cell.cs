@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Cell : MonoBehaviour {
 
     [SerializeField] private Button cellSelectionButton;
-    [SerializeField] private float waitingTimerMax = 0.5f;
     [SerializeField] private Transform snappedVisual;
     [SerializeField] private Transform movingCellDoor;
     [SerializeField] private int defaultSnapDoorNumber;
@@ -87,10 +86,6 @@ public class Cell : MonoBehaviour {
         ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
         isSnappedVisualActive = true;
         this.boxCastOriginPoint = boxCastOriginPoint;
-
-        //movementManager.GoToPoint(cellSnapPoint, boxCastDirectionNormalized);
-        //waitingTimer.WaitFor(waitingTimerMax);
-        //isWaiting = true;
     }
 
     public void SetRoute(Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint, Cell boxCastingCell) {
@@ -99,7 +94,7 @@ public class Cell : MonoBehaviour {
         int wantedRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
         int currentRotation = GetNumInRange((int)transform.eulerAngles.z);
         int maxLoops = numberOfDoors;
-        //bool foundOtherDoor = false;
+        bool foundOtherDoor = false;
 
         while (wantedRotation != currentRotation) {
             doorIndex = doorIndex + 1;
@@ -107,27 +102,23 @@ public class Cell : MonoBehaviour {
                 doorIndex = 1;
             }
             wantedRotation = GetNumInRange(wantedRotation - (360 / numberOfDoors));
-            //if(wantedRotation == currentRotation) {
-            //    foundOtherDoor = true;
-            //    break;
-            //}
-            //if(maxLoops == 0) {
-            //    break;
-            //}
-            //maxLoops--;
+            if(wantedRotation == currentRotation) {
+                foundOtherDoor = true;
+                break;
+            }
+            if (maxLoops == 0) {
+                break;
+            }
+            maxLoops--;
         }
 
-        //if (foundOtherDoor == true) {
+        if (foundOtherDoor == true) {
             Transform innerDoor = boxCastManager.GetBoxCastOriginPoint(doorIndex - 1);
-            Debug.Log("Added boxcast pair " + innerDoor.name + " and " + boxCastOriginPoint.name);
+            Debug.Log("Added boxcast pair " + innerDoor.parent.gameObject.name + "." + innerDoor.name + " and " + boxCastOriginPoint.parent.gameObject.name + "." + boxCastOriginPoint.name);
             SetRouting(innerDoor, boxCastOriginPoint);
             boxCastingCell.SetRouting(boxCastOriginPoint, innerDoor);
-        //}
+        }
     }
-
-    //public void SetRoutePairInPoint(Transform boxCastOriginPoint, Transform hitDoor) {
-    //    routingManager.SetRoutePair(boxCastOriginPoint, hitDoor);
-    //}
 
     public int GetNumInRange(int num) {
         if(num > 180) {
@@ -178,6 +169,8 @@ public class Cell : MonoBehaviour {
     }
 
     private void SetRouting(Transform movingCellDoor, Transform boxCastOriginPoint) {
+
+        waitingTimer.WaitForFewSecond(boxCastManager);
         routingManager.SetRoutePair(movingCellDoor, boxCastOriginPoint);
     }
 

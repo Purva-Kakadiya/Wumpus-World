@@ -481,7 +481,6 @@ MonoBehaviour:
   movingCellDoor: {fileID: 1924890662190295038}
   defaultSnapDoorNumber: 2
   numberOfDoors: 3
-  possibleDoorsInCercle: 0
 --- !u!114 &5551829808422627431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,8 +508,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
   boxCastLength: 0.1
-  boxCastWidth: 0.5
-  extraDistance: 0.1
+  boxCastWidth: 0.3
+  extraDistance: 1
   distanceBetweenCell: 0.2
   castHitLayer:
     serializedVersion: 2

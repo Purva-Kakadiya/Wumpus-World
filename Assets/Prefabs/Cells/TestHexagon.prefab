@@ -410,8 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
   boxCastLength: 0.1
-  boxCastWidth: 0.5
-  extraDistance: 0.1
+  boxCastWidth: 0.3
+  extraDistance: 1
   distanceBetweenCell: 0.2
   castHitLayer:
     serializedVersion: 2

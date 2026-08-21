@@ -18,7 +18,6 @@ public class BoxCastManager : MonoBehaviour {
     private PolygonCollider2D polygonCollider;
     private bool isSnapped = false;
     private bool atleastOneBoxCastHit = false;
-    private bool isBoxCastActive = false;
 
 
     private void Awake() {
@@ -27,12 +26,7 @@ public class BoxCastManager : MonoBehaviour {
     }
 
     private void Update() {
-        if(!cell.IsObjectSelected() && isBoxCastActive == false) {
-
-            StartCoroutine(WaitForFewSeconds());
-        }
-
-        if(isBoxCastActive == true) {
+        if(!cell.IsObjectSelected()) {
             ActivateBoxCast();
         }
 
@@ -43,12 +37,6 @@ public class BoxCastManager : MonoBehaviour {
             }
         }
 
-    }
-
-    IEnumerator WaitForFewSeconds() {
-        isBoxCastActive = true;
-
-        yield return new WaitForSeconds(2f);
     }
         
 
@@ -76,7 +64,7 @@ public class BoxCastManager : MonoBehaviour {
                         targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
                         return;
                     } else {
-                        //Debug.Log("boxCast cell is: " + transform.name + " hit cell is: " + targetCell.name);
+                        Debug.Log("boxCast cell is: " + transform.name + " hit cell is: " + targetCell.name);
                         targetCell.SetRoute(boxCastDirectionNormalized, boxCastOriginPointsArray[i], cell);
                     }
                 }

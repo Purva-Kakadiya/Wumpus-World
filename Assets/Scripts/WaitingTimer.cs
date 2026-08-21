@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WaitingTimer : MonoBehaviour {
@@ -10,22 +11,15 @@ public class WaitingTimer : MonoBehaviour {
         cell = GetComponent<Cell>();
     }
 
-    private void Update() {
-        if(timer > 0f) {
-            timer -= Time.deltaTime;
-        } else {
-            timer = 0f;
-        }
-
-        if(isWaiting && timer <= 0f) {
-            cell.SetIsWaiting(false);
-            isWaiting = false;
-        }
+    public void WaitForFewSecond(MonoBehaviour scriptName) {
+        StartCoroutine(DisableScript(scriptName));
     }
 
-    public void WaitFor(float timerMax) {
-        timer = timerMax;
-        isWaiting = true;
+    IEnumerator DisableScript(MonoBehaviour scriptName) {
+        scriptName.enabled = false;
+
+        yield return new WaitForSeconds(2f);
+        scriptName.enabled = true;
     }
 
 }
