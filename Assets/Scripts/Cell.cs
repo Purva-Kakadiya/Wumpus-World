@@ -11,6 +11,7 @@ public class Cell : MonoBehaviour {
     [SerializeField] private Transform movingCellDoor;
     [SerializeField] private int defaultSnapDoorNumber;
     [SerializeField] private int numberOfDoors;
+    [SerializeField] private bool isTriangle;
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
@@ -101,7 +102,11 @@ public class Cell : MonoBehaviour {
             if (doorIndex > numberOfDoors) {
                 doorIndex = 1;
             }
-            wantedRotation = GetNumInRange(wantedRotation - (360 / numberOfDoors));
+            if (isTriangle) {
+                wantedRotation = GetNumInRange(wantedRotation - (360 / numberOfDoors));
+            } else {
+                wantedRotation = GetNumInRange(wantedRotation + (360 / numberOfDoors));
+            }
             if(wantedRotation == currentRotation) {
                 foundOtherDoor = true;
                 break;

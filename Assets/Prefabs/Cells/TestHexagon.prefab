@@ -378,7 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
   cellSelectionButton: {fileID: 6051589791752503433}
-  waitingTimerMax: 0.5
   snappedVisual: {fileID: 6799898907614900720}
   movingCellDoor: {fileID: 6186886794075246848}
   defaultSnapDoorNumber: 6
@@ -410,8 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxCastManager
   boxCastLength: 0.1
-  boxCastWidth: 0.3
-  extraDistance: 1
+  boxCastWidth: 0.5
+  extraDistance: 0.1
   distanceBetweenCell: 0.2
   castHitLayer:
     serializedVersion: 2

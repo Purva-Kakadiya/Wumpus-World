@@ -50,8 +50,11 @@ public class BoxCastManager : MonoBehaviour {
             Vector2 boxCastOriginGlobalPoint = boxCastOriginPointsArray[i].position;
             Vector2 boxCastSize = new Vector2(boxCastLength, boxCastWidth);
             Vector2 boxCastDirectionNormalized = (boxCastOriginGlobalPoint - (Vector2)cellCenter.position).normalized;
+            float boxCastRotation = Mathf.Atan2(boxCastDirectionNormalized.y, boxCastDirectionNormalized.x) * Mathf.Rad2Deg + 90f;
 
-            RaycastHit2D hit = Physics2D.BoxCast(boxCastOriginGlobalPoint, boxCastSize, 0f, boxCastDirectionNormalized,extraDistance, castHitLayer);
+            RaycastHit2D hit = Physics2D.BoxCast(boxCastOriginGlobalPoint, boxCastSize, boxCastRotation, boxCastDirectionNormalized, extraDistance, castHitLayer);
+
+            //DrawBoxCast(boxCastOriginGlobalPoint, boxCastSize,boxCastRotation, boxCastDirectionNormalized);
 
             if ((hit.collider != null) && (hit.collider != polygonCollider)) {
                 if (hit.collider.TryGetComponent<Cell>(out Cell targetCell)) {
@@ -64,7 +67,6 @@ public class BoxCastManager : MonoBehaviour {
                         targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
                         return;
                     } else {
-                        Debug.Log("boxCast cell is: " + transform.name + " hit cell is: " + targetCell.name);
                         targetCell.SetRoute(boxCastDirectionNormalized, boxCastOriginPointsArray[i], cell);
                     }
                 }
@@ -74,9 +76,39 @@ public class BoxCastManager : MonoBehaviour {
         atleastOneBoxCastHit = false;
     }
 
-    //private void SetLastBoxCastHitCell(Cell lastHitCell) {
-    //    this.lastHitCell = lastHitCell;
+    //private void DrawBoxCast(Vector2 boxCastOrigin, Vector2 boxSize, float boxCastRotation, Vector2 direction) {
+    //    Vector2 halfSize = boxSize * 0.5f;
+    //    Quaternion rotation = Quaternion.Euler(0, 0, boxCastRotation);
+
+    //    Vector2 topLeft = boxCastOrigin + (Vector2)(rotation * new Vector2(-halfSize.x, halfSize.y));
+    //    Vector2 topRight = boxCastOrigin + (Vector2)(rotation * new Vector2(halfSize.x, halfSize.y));
+    //    Vector2 bottomLeft = boxCastOrigin + (Vector2)(rotation * new Vector2(-halfSize.x, -halfSize.y));
+    //    Vector2 bottomRight = boxCastOrigin + (Vector2)(rotation * new Vector2(halfSize.x, -halfSize.y));
+
+    //    // Box at start
+    //    Debug.DrawLine(topLeft, topRight, Color.red);
+    //    Debug.DrawLine(topRight, bottomRight, Color.red);
+    //    Debug.DrawLine(bottomRight, bottomLeft, Color.red);
+    //    Debug.DrawLine(bottomLeft, topLeft, Color.red);
+
+    //    // Box at end of the cast
+    //    Vector2 offset = direction * extraDistance;
+    //    Debug.DrawLine(topLeft + offset, topRight + offset, Color.red);
+    //    Debug.DrawLine(topRight + offset, bottomRight + offset, Color.red);
+    //    Debug.DrawLine(bottomRight + offset, bottomLeft + offset, Color.red);
+    //    Debug.DrawLine(bottomLeft + offset, topLeft + offset, Color.red);
+
+    //    // Connect start box to end box (shows the swept path)
+    //    Debug.DrawLine(topLeft, topLeft + offset, Color.red);
+    //    Debug.DrawLine(topRight, topRight + offset, Color.red);
+    //    Debug.DrawLine(bottomLeft, bottomLeft + offset, Color.red);
+    //    Debug.DrawLine(bottomRight, bottomRight + offset, Color.red);
+
     //}
+
+    private void SetLastBoxCastHitCell(Cell lastHitCell) {
+        this.lastHitCell = lastHitCell;
+    }
 
     public bool IsSnappingActive() {
         return isSnapped;
