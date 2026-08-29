@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186886794075246848}
   m_Layer: 3
-  m_Name: BoxCastOrigin6
+  m_Name: BoxCastOrigin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 350787088376789093}
   m_Layer: 3
-  m_Name: SnapPoint3
+  m_Name: SnapPoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1192535986180190548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65, y: -0.9526, z: 0}
+  m_LocalPosition: {x: 1.0366, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6538117667334284274}
   m_Layer: 3
-  m_Name: SnapPoint2
+  m_Name: SnapPoint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 2204913663213094707}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0317, y: -0.0183, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 3201357395005916741}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.55, y: -0.9526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 845106663321704254}
   m_Layer: 3
-  m_Name: BoxCastOrigin3
+  m_Name: BoxCastOrigin4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.55, y: -0.95}
+  m_AnchoredPosition: {x: 0.5183, y: -0.9343}
   m_SizeDelta: {x: 2, y: 1.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4544705070695773867
@@ -296,18 +296,18 @@ Transform:
   - {fileID: 2586648570389647008}
   - {fileID: 6799898907614900720}
   - {fileID: 5734826694060471157}
-  - {fileID: 647302327595585243}
-  - {fileID: 5044540640005306481}
-  - {fileID: 845106663321704254}
-  - {fileID: 548606443042365325}
-  - {fileID: 3065478271969824084}
   - {fileID: 6186886794075246848}
+  - {fileID: 3065478271969824084}
+  - {fileID: 548606443042365325}
+  - {fileID: 845106663321704254}
+  - {fileID: 5044540640005306481}
+  - {fileID: 647302327595585243}
   - {fileID: 7812561900460844603}
-  - {fileID: 6538117667334284274}
-  - {fileID: 350787088376789093}
-  - {fileID: 3727126696847610169}
-  - {fileID: 5817904424211737032}
   - {fileID: 7019275725588546009}
+  - {fileID: 5817904424211737032}
+  - {fileID: 3727126696847610169}
+  - {fileID: 350787088376789093}
+  - {fileID: 6538117667334284274}
   - {fileID: 6386982177598882389}
   - {fileID: 3179660768219114613}
   m_Father: {fileID: 0}
@@ -358,12 +358,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.084839344, y: -0.081703424}
-      - {x: -0.42611235, y: -0.96357524}
-      - {x: 0.06737608, y: -1.8498408}
-      - {x: 1.0856402, y: -1.8483423}
-      - {x: 1.5971506, y: -0.9654619}
-      - {x: 1.0990516, y: -0.08044368}
+    - - {x: -0.019765258, y: -0.04901451}
+      - {x: -0.49149024, y: -0.937424}
+      - {x: 0.015073791, y: -1.810614}
+      - {x: 1.039876, y: -1.8091155}
+      - {x: 1.53831, y: -0.9327728}
+      - {x: 1.027136, y: -0.05429256}
   m_UseDelaunayMesh: 1
 --- !u!114 &157890899199904154
 MonoBehaviour:
@@ -380,7 +380,7 @@ MonoBehaviour:
   cellSelectionButton: {fileID: 6051589791752503433}
   snappedVisual: {fileID: 6799898907614900720}
   movingCellDoor: {fileID: 6186886794075246848}
-  defaultSnapDoorNumber: 6
+  defaultSnapDoorNumber: 1
   numberOfDoors: 6
 --- !u!114 &2592354836615701485
 MonoBehaviour:
@@ -416,19 +416,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   boxCastOriginPointsArray:
-  - {fileID: 647302327595585243}
-  - {fileID: 5044540640005306481}
-  - {fileID: 845106663321704254}
-  - {fileID: 548606443042365325}
-  - {fileID: 3065478271969824084}
   - {fileID: 6186886794075246848}
-  cellSnapPointsArray:
+  - {fileID: 3065478271969824084}
+  - {fileID: 548606443042365325}
+  - {fileID: 845106663321704254}
+  - {fileID: 5044540640005306481}
+  - {fileID: 647302327595585243}
+  boxCastSnapPointsArray:
   - {fileID: 7812561900460844603}
-  - {fileID: 6538117667334284274}
-  - {fileID: 350787088376789093}
-  - {fileID: 3727126696847610169}
-  - {fileID: 5817904424211737032}
   - {fileID: 7019275725588546009}
+  - {fileID: 5817904424211737032}
+  - {fileID: 3727126696847610169}
+  - {fileID: 350787088376789093}
+  - {fileID: 6538117667334284274}
   cellCenter: {fileID: 6386982177598882389}
 --- !u!114 &1354392955072525588
 MonoBehaviour:
@@ -493,7 +493,7 @@ Transform:
   m_GameObject: {fileID: 4361307276203714128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: -0.9526, z: 0}
+  m_LocalPosition: {x: 0.5183, y: -0.9343, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548606443042365325}
   m_Layer: 3
-  m_Name: BoxCastOrigin4
+  m_Name: BoxCastOrigin3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,7 +540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5817904424211737032}
   m_Layer: 3
-  m_Name: SnapPoint5
+  m_Name: SnapPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,7 +555,7 @@ Transform:
   m_GameObject: {fileID: 4777466854022253427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.9025, z: 0}
+  m_LocalPosition: {x: 1.0683, y: -1.8504, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -724,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 5719936667726623121}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.55, y: -0.9526, z: 0}
+  m_LocalPosition: {x: 0.5183, y: -0.9343, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -799,7 +799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647302327595585243}
   m_Layer: 3
-  m_Name: BoxCastOrigin1
+  m_Name: BoxCastOrigin6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,7 +830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5044540640005306481}
   m_Layer: 3
-  m_Name: BoxCastOrigin2
+  m_Name: BoxCastOrigin5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -861,7 +861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3065478271969824084}
   m_Layer: 3
-  m_Name: BoxCastOrigin5
+  m_Name: BoxCastOrigin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -907,7 +907,7 @@ Transform:
   m_GameObject: {fileID: 7488776953548606990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1, y: -1.9025, z: 0}
+  m_LocalPosition: {x: 1.5866, y: -0.916, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -923,7 +923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7019275725588546009}
   m_Layer: 3
-  m_Name: SnapPoint6
+  m_Name: SnapPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -938,7 +938,7 @@ Transform:
   m_GameObject: {fileID: 7746000457900205295}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.55, y: -0.9526, z: 0}
+  m_LocalPosition: {x: 0, y: -1.8687, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1033,7 +1033,7 @@ Transform:
   m_GameObject: {fileID: 8429976309016195418}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: -0.9526, z: 0}
+  m_LocalPosition: {x: 0.5183, y: -0.9343, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

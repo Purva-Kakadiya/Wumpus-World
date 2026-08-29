@@ -10,7 +10,7 @@ public class BoxCastManager : MonoBehaviour {
     [SerializeField] private float distanceBetweenCell = 0.2f;
     [SerializeField] private LayerMask castHitLayer;
     [SerializeField] private Transform[] boxCastOriginPointsArray;
-    [SerializeField] private Transform[] cellSnapPointsArray;
+    [SerializeField] private Transform[] boxCastSnapPointsArray;
     [SerializeField] private Transform cellCenter;
 
     private Cell cell;
@@ -64,7 +64,8 @@ public class BoxCastManager : MonoBehaviour {
 
                         atleastOneBoxCastHit = true;
                         lastHitCell = targetCell;
-                        targetCell.SnapAtPoint(cellSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
+
+                        targetCell.SnapAtPoint(boxCastSnapPointsArray[i].position, boxCastDirectionNormalized, boxCastOriginPointsArray[i]);
                         return;
                     } else {
                         targetCell.SetRoute(boxCastDirectionNormalized, boxCastOriginPointsArray[i], cell);
