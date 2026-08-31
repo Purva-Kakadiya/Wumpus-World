@@ -11,11 +11,11 @@ public class WaitingTimer : MonoBehaviour {
         cell = GetComponent<Cell>();
     }
 
-    public void WaitForFewSecond(MonoBehaviour scriptName) {
+    public void WaitForFewSecond(Behaviour scriptName) {
         StartCoroutine(DisableScript(scriptName));
     }
 
-    IEnumerator DisableScript(MonoBehaviour scriptName) {
+    IEnumerator DisableScript(Behaviour scriptName) {
         scriptName.enabled = false;
 
         yield return new WaitForSeconds(2f);
