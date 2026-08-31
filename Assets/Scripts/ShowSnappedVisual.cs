@@ -6,6 +6,7 @@ public class ShowSnappedVisual : MonoBehaviour {
     public static ShowSnappedVisual Instance { get; private set; }
 
     [SerializeField] private Transform visualSnapPoint;
+    [SerializeField] private float snapPointDistanceFromCenter;
 
     private bool isSnappedVisual = false;
 
@@ -24,13 +25,11 @@ public class ShowSnappedVisual : MonoBehaviour {
     //    this.snapPoint = snapPoint;
     //}
 
-    public void ShowSnapVisual(Vector3 snapPoint, float snapPointRotation, Transform snappedVisual) {
-        snappedVisual.transform.position = snapPoint;
+    public void ShowSnapVisual(Vector3 snapPoint,Vector3 boxCastDirectionNormalized, float snapPointRotation, Transform snappedVisual) {
+        Vector3 snappedVisualPoint = snapPoint + (boxCastDirectionNormalized * snapPointDistanceFromCenter);
+        snappedVisual.transform.position = snappedVisualPoint;
         snappedVisual.rotation = Quaternion.Euler(0f, 0f, snapPointRotation);
         snappedVisual.gameObject.SetActive(true);
-
-        visualSnapPoint.transform.position = snapPoint;
-        visualSnapPoint.transform.rotation = snappedVisual.rotation;
     }
 
     public Transform GetSnappedVisualTransform() {

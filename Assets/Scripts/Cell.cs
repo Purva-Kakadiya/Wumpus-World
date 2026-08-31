@@ -83,7 +83,7 @@ public class Cell : MonoBehaviour {
     public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint) {
         int snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
 
-        ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint, snapPointRotation, snappedVisual);
+        ShowSnappedVisual.Instance.ShowSnapVisual(cellSnapPoint,boxCastDirectionNormalized, snapPointRotation, snappedVisual);
         isSnappedVisualActive = true;
         this.boxCastOriginPoint = boxCastOriginPoint;
     }
@@ -97,12 +97,13 @@ public class Cell : MonoBehaviour {
         bool foundOtherDoor = false;
 
         while (wantedRotation != currentRotation) {
+            Debug.Log("wantedRotation is: " + wantedRotation + " and currentRotation is: " + currentRotation);
             doorIndex = doorIndex + 1;
             if (doorIndex > numberOfDoors) {
                 doorIndex = 1;
             }
             
-            wantedRotation = GetNumInRange(wantedRotation + (360 / numberOfDoors));
+            wantedRotation = GetNumInRange(wantedRotation - (360 / numberOfDoors));
             if(wantedRotation == currentRotation) {
                 foundOtherDoor = true;
                 break;
@@ -152,8 +153,8 @@ public class Cell : MonoBehaviour {
 
     public void CellMovementConfirmed() {
         if(isSnappedVisualActive) {
-            Transform newCellTransform = ShowSnappedVisual.Instance.GetSnappedVisualTransform();
-            movementManager.MoveCellTo(newCellTransform);
+            //Transform newCellTransform = ShowSnappedVisual.Instance.GetSnappedVisualTransform();
+            movementManager.MoveCellTo(snappedVisual);
             ShowSnappedVisual.Instance.SetSnapVisualInactive(snappedVisual);
             isSnappedVisualActive = false;
 
@@ -172,6 +173,7 @@ public class Cell : MonoBehaviour {
     private void SetRouting(Transform movingCellDoor, Transform boxCastOriginPoint) {
 
         waitingTimer.WaitForFewSecond(boxCastManager);
+        waitingTimer.WaitForFewSecond(polygonCollider);
         routingManager.SetRoutePair(movingCellDoor, boxCastOriginPoint);
     }
 
