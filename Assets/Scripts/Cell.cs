@@ -97,7 +97,6 @@ public class Cell : MonoBehaviour {
         bool foundOtherDoor = false;
 
         while (wantedRotation != currentRotation) {
-            Debug.Log("wantedRotation is: " + wantedRotation + " and currentRotation is: " + currentRotation);
             doorIndex = doorIndex + 1;
             if (doorIndex > numberOfDoors) {
                 doorIndex = 1;
@@ -149,6 +148,11 @@ public class Cell : MonoBehaviour {
         lastCellTransform = gameObject.transform;
         SelectionManager.Instance.SetActiveObject(gameObject);
         EditMapOptionsUI.Instance.SetConfirmPanelActive(this);
+        routingManager.ResetSnappedDoorList();
+    }
+
+    public void RemoveSnapPairWithKey(Transform innerDoor, Transform outerDoor) {
+        routingManager.RemoveSnapPair(innerDoor, outerDoor);
     }
 
     public void CellMovementConfirmed() {

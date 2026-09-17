@@ -10,7 +10,7 @@ public class MovementManager : MonoBehaviour {
     //[SerializeField] private Transform snapPoint;
 
     private Cell cell;
-    private Vector3 moveDir;
+    private Vector3 moveDir = Vector3.zero;
     private bool moveRequested = false;
     private bool rotationRequested = false;
 
@@ -21,18 +21,17 @@ public class MovementManager : MonoBehaviour {
     private void Update() {
 
         if(cell.IsObjectSelected()) {
-            moveDir = new Vector3();
             if (Input.GetKey(KeyCode.W)) {
-                moveDir = Vector3.up;
+                moveDir += Vector3.up;
             }
             if (Input.GetKey(KeyCode.S)) {
-                moveDir = Vector3.down;
+                moveDir += Vector3.down;
             }
             if (Input.GetKey(KeyCode.A)) {
-                moveDir = Vector3.left;
+                moveDir += Vector3.left;
             }
             if (Input.GetKey(KeyCode.D)) {
-                moveDir = Vector3.right;
+                moveDir += Vector3.right;
             }
 
             if (moveDir != Vector3.zero) {
@@ -47,8 +46,10 @@ public class MovementManager : MonoBehaviour {
 
     private void FixedUpdate() {
         if (moveRequested) {
-            transform.position += moveDir * moveDistance;
+            Vector3 moveDirNormalized = moveDir.normalized;
+            transform.position += moveDirNormalized * moveDistance;
             moveRequested = false;
+            moveDir = Vector3.zero;
         }
 
         //if(rotationRequested) {
