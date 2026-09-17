@@ -77,6 +77,10 @@ public class BoxCastManager : MonoBehaviour {
         atleastOneBoxCastHit = false;
     }
 
+    public Vector3 GetCellCenter() {
+        return cellCenter.transform.position;
+    }
+
     private void DrawBoxCast(Vector2 boxCastOrigin, Vector2 boxSize, float boxCastRotation, Vector2 direction) {
         Vector2 halfSize = boxSize * 0.5f;
         Quaternion rotation = Quaternion.Euler(0, 0, boxCastRotation);

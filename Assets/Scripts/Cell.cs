@@ -19,6 +19,7 @@ public class Cell : MonoBehaviour {
     private RoutingManager routingManager;
     private bool isWaiting = false;
     private bool isSnappedVisualActive = false;
+    private bool inPlayMode = true;
 
 
     private Transform lastCellTransform;
@@ -31,6 +32,10 @@ public class Cell : MonoBehaviour {
         waitingTimer = GetComponent<WaitingTimer>();
         boxCastManager = GetComponent<BoxCastManager>();
         routingManager = GetComponent<RoutingManager>();
+
+        if (inPlayMode) {
+            cellSelectionButton.interactable = false;
+        }
 
         cellSelectionButton.onClick.AddListener(() => {
             ActivateCellMovement();
@@ -80,6 +85,19 @@ public class Cell : MonoBehaviour {
         return polygonCollider;
     }
 
+    public Vector3 GetCellCenter() {
+        Vector3 cellCenter = boxCastManager.GetCellCenter();
+        return cellCenter;
+    }
+
+    public void SetVisitableCell() {
+        routingManager.SetRoutePairActive();
+    }
+
+    public void SetRouteVisitability(bool isVisitable) {
+        cellSelectionButton.interactable = isVisitable;
+    }
+
     public void SnapAtPoint(Vector3 cellSnapPoint, Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint) {
         int snapPointRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
 
@@ -89,12 +107,15 @@ public class Cell : MonoBehaviour {
     }
 
     public void SetRoute(Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint, Cell boxCastingCell) {
-
         int doorIndex = defaultSnapDoorNumber;
         int wantedRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
         int currentRotation = GetNumInRange((int)transform.eulerAngles.z);
         int maxLoops = numberOfDoors;
         bool foundOtherDoor = false;
+
+        if (wantedRotation == currentRotation) {
+            foundOtherDoor = true;
+        }
 
         while (wantedRotation != currentRotation) {
             doorIndex = doorIndex + 1;

@@ -1,9 +1,12 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
 
     public static Player Instance { get; private set; }
+
+    private Cell parentCell;
 
     private void Awake() {
         if(Instance != null) {
@@ -14,6 +17,11 @@ public class Player : MonoBehaviour {
 
     private void Start() {
         //gameInput.OnMoveUpActions += GameInput_OnMoveUpAction;
+    }
+
+    private void Update() {
+        parentCell = transform.parent.GetComponent<Cell>();
+        parentCell.SetVisitableCell();
     }
 
     //private void GameInput_OnMoveUpAction(object sender, EventArgs e) {

@@ -18,7 +18,10 @@ public class Level : MonoBehaviour {
     }
 
     public void OnLevelLoad() {
+        Vector3 playerTransform = startingCell.GetCellCenter();
         player = Instantiate(playerPrefab, startingCell.transform);
+        player.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+        player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
         MakePlayerRotationZero();
     }
 

@@ -1823,13 +1823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 1205040750390709269}
-    outerDoor: {fileID: 4752879950057969214}
-  - door: {fileID: 537946540542629720}
-    outerDoor: {fileID: 4372501570486724125}
-  - door: {fileID: 4240668129003780709}
-    outerDoor: {fileID: 3357881753190100993}
+  routePairList: []
 --- !u!1 &980402639625807395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,11 +2807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 7642333656187835682}
-    outerDoor: {fileID: 5247259690065818589}
-  - door: {fileID: 6963868171765015343}
-    outerDoor: {fileID: 219214420742228845}
+  routePairList: []
 --- !u!1 &1399179733326045499
 GameObject:
   m_ObjectHideFlags: 0
@@ -4231,13 +4221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 3357881753190100993}
-    outerDoor: {fileID: 4240668129003780709}
-  - door: {fileID: 5476525335863025215}
-    outerDoor: {fileID: 5474327841699653397}
-  - door: {fileID: 2642784382028626781}
-    outerDoor: {fileID: 6585610247723352563}
+  routePairList: []
 --- !u!1 &2284522066725989453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5374,11 +5358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 6585610247723352563}
-    outerDoor: {fileID: 2642784382028626781}
-  - door: {fileID: 2231850194024415940}
-    outerDoor: {fileID: 8648350711757082110}
+  routePairList: []
 --- !u!1 &2781689881482320125
 GameObject:
   m_ObjectHideFlags: 0
@@ -5643,13 +5623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 219214420742228845}
-    outerDoor: {fileID: 6963868171765015343}
-  - door: {fileID: 734020717848636651}
-    outerDoor: {fileID: 5520141510392880765}
-  - door: {fileID: 5474327841699653397}
-    outerDoor: {fileID: 5476525335863025215}
+  routePairList: []
 --- !u!1 &2911641387314258519
 GameObject:
   m_ObjectHideFlags: 0
@@ -7100,13 +7074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 4230500348792585895}
-    outerDoor: {fileID: 4846983846714644836}
-  - door: {fileID: 4752879950057969214}
-    outerDoor: {fileID: 1205040750390709269}
-  - door: {fileID: 8648350711757082110}
-    outerDoor: {fileID: 2231850194024415940}
+  routePairList: []
 --- !u!1 &3768877828573280481
 GameObject:
   m_ObjectHideFlags: 0
@@ -7552,11 +7520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 3562808110421911804}
-    outerDoor: {fileID: 1930675582138842449}
-  - door: {fileID: 7197390141701247867}
-    outerDoor: {fileID: 2541770413491934998}
+  routePairList: []
 --- !u!1 &3966952675500380248
 GameObject:
   m_ObjectHideFlags: 0
@@ -9268,13 +9232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 4822066349733458064}
-    outerDoor: {fileID: 3430359153629627280}
-  - door: {fileID: 181478266615931893}
-    outerDoor: {fileID: 4161627988192488025}
-  - door: {fileID: 8783448389859086340}
-    outerDoor: {fileID: 2039033774903004818}
+  routePairList: []
 --- !u!1 &4717101021613848673
 GameObject:
   m_ObjectHideFlags: 0
@@ -9832,13 +9790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 156574600869569141}
-    outerDoor: {fileID: 6740569896285100117}
-  - door: {fileID: 1742787498094328004}
-    outerDoor: {fileID: 2192683458853008365}
-  - door: {fileID: 1676261662278499437}
-    outerDoor: {fileID: 395443338796855056}
+  routePairList: []
 --- !u!1 &4765195217040171828
 GameObject:
   m_ObjectHideFlags: 0
@@ -11390,13 +11342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 5314283207971118578}
-    outerDoor: {fileID: 997567117932487652}
-  - door: {fileID: 2001390352379164119}
-    outerDoor: {fileID: 8500020418105394667}
-  - door: {fileID: 6740569896285100117}
-    outerDoor: {fileID: 156574600869569141}
+  routePairList: []
 --- !u!1 &5674589404401029127
 GameObject:
   m_ObjectHideFlags: 0
@@ -12299,11 +12245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 2541770413491934998}
-    outerDoor: {fileID: 7197390141701247867}
-  - door: {fileID: 2039033774903004818}
-    outerDoor: {fileID: 8783448389859086340}
+  routePairList: []
 --- !u!1 &6092907392194689193
 GameObject:
   m_ObjectHideFlags: 0
@@ -12730,11 +12672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 8500020418105394667}
-    outerDoor: {fileID: 2001390352379164119}
-  - door: {fileID: 4161627988192488025}
-    outerDoor: {fileID: 181478266615931893}
+  routePairList: []
 --- !u!1 &6280681003509684473
 GameObject:
   m_ObjectHideFlags: 0
@@ -13147,13 +13085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 874095702729220668}
-    outerDoor: {fileID: 7017212096157068422}
-  - door: {fileID: 1930675582138842449}
-    outerDoor: {fileID: 3562808110421911804}
-  - door: {fileID: 5247259690065818589}
-    outerDoor: {fileID: 7642333656187835682}
+  routePairList: []
 --- !u!1 &6449120556567321677
 GameObject:
   m_ObjectHideFlags: 0
@@ -13536,13 +13468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 6487098610080747515}
-    outerDoor: {fileID: 2544326309196258102}
-  - door: {fileID: 2192683458853008365}
-    outerDoor: {fileID: 1742787498094328004}
-  - door: {fileID: 4846983846714644836}
-    outerDoor: {fileID: 4230500348792585895}
+  routePairList: []
 --- !u!1 &6574095558263365422
 GameObject:
   m_ObjectHideFlags: 0
@@ -13740,9 +13666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 395443338796855056}
-    outerDoor: {fileID: 1676261662278499437}
+  routePairList: []
 --- !u!1 &6637124675136464469
 GameObject:
   m_ObjectHideFlags: 0
@@ -16868,19 +16792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde3e403252991f49ab87a5095ff2956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoutingManager
-  routePairList:
-  - door: {fileID: 3430359153629627280}
-    outerDoor: {fileID: 4822066349733458064}
-  - door: {fileID: 997567117932487652}
-    outerDoor: {fileID: 5314283207971118578}
-  - door: {fileID: 2544326309196258102}
-    outerDoor: {fileID: 6487098610080747515}
-  - door: {fileID: 4372501570486724125}
-    outerDoor: {fileID: 537946540542629720}
-  - door: {fileID: 7017212096157068422}
-    outerDoor: {fileID: 874095702729220668}
-  - door: {fileID: 5520141510392880765}
-    outerDoor: {fileID: 734020717848636651}
+  routePairList: []
 --- !u!1 &8410057666228049620
 GameObject:
   m_ObjectHideFlags: 0
