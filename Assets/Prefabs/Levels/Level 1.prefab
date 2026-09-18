@@ -6186,6 +6186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1396636646307446088}
   - component: {fileID: 1241548273826863581}
+  - component: {fileID: 6525743467068297547}
   m_Layer: 3
   m_Name: Level 1
   m_TagString: Untagged
@@ -6239,6 +6240,18 @@ MonoBehaviour:
   startingCell: {fileID: 567116354222138239}
   endCell: {fileID: 1940736357577578489}
   playerPrefab: {fileID: 1502876830611740643, guid: 9424f193b6c74cf48beac9307810e241, type: 3}
+--- !u!114 &6525743467068297547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401407074490014074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01af2c1b7524443834b8e258e46c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaitingTimer
 --- !u!1 &3410313364194051684
 GameObject:
   m_ObjectHideFlags: 0

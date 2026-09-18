@@ -15,11 +15,16 @@ public class Level : MonoBehaviour {
             Debug.LogError("more that one instance of level found!");
         }
         Instance = this;
+
     }
 
-    public void OnLevelLoad() {
-        Vector3 playerTransform = startingCell.GetCellCenter();
-        player = Instantiate(playerPrefab, startingCell.transform);
+    public void LevelSpawned() {
+        PlayerVisitCell(startingCell);
+    }
+
+    public void PlayerVisitCell(Cell visitingCell) {
+        player = Instantiate(playerPrefab, visitingCell.transform);
+        Vector3 playerTransform = visitingCell.GetCellCenter();
         player.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
         player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
         MakePlayerRotationZero();

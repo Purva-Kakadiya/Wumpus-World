@@ -9,9 +9,11 @@ public class LevelSpawner : MonoBehaviour {
 
     private void Awake() {
         level1Button.onClick.AddListener(() => {
+            GameModeManager.Instance.SetGameMode(GameMode.PlayGame);
+
             Level spawnLevel = Instantiate(level1, levelSpawnLocation);
-            spawnLevel.OnLevelLoad();
-            this.gameObject.SetActive(false);
+            spawnLevel.LevelSpawned();
+            level1Button.gameObject.SetActive(false);
         });
     }
 

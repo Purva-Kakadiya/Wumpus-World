@@ -19,7 +19,6 @@ public class Cell : MonoBehaviour {
     private RoutingManager routingManager;
     private bool isWaiting = false;
     private bool isSnappedVisualActive = false;
-    private bool inPlayMode = true;
 
 
     private Transform lastCellTransform;
@@ -32,14 +31,25 @@ public class Cell : MonoBehaviour {
         waitingTimer = GetComponent<WaitingTimer>();
         boxCastManager = GetComponent<BoxCastManager>();
         routingManager = GetComponent<RoutingManager>();
+        boxCastManager = GetComponent<BoxCastManager>();
 
-        if (inPlayMode) {
+        if (GameModeManager.Instance.GetCurrentGameMode() == GameMode.PlayGame) {
             cellSelectionButton.interactable = false;
         }
 
         cellSelectionButton.onClick.AddListener(() => {
-            ActivateCellMovement();
+            if (GameModeManager.Instance.GetCurrentGameMode() == GameMode.EditMap) {
+                ActivateCellMovement();
+            } else {
+                Level gameLevel = transform.parent.GetComponent<Level>();
+                if(gameLevel != null) {
+                    Debug.Log(gameLevel.name);
+                } else {
+                    Debug.Log("Level not found!");
+                }
+            }
         });
+
     }
 
     private void Update() {
