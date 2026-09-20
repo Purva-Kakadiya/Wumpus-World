@@ -70,6 +70,13 @@ public class RoutingManager : MonoBehaviour {
         }
     }
 
+    public void SetRoutePairInactive() {
+        foreach (RoutePair pair in routePairList) {
+            Cell otherCell = pair.outerDoor.parent.GetComponent<Cell>();
+            otherCell.SetRouteVisitability(false);
+        }
+    }
+
     public void RemoveSnapPair(Transform innerDoor, Transform outerDoor) {
         routePairList.RemoveAll(p => p.innerDoor == innerDoor && p.outerDoor == outerDoor);
         routePairs.Remove(innerDoor);

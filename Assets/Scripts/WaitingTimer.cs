@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,15 +12,16 @@ public class WaitingTimer : MonoBehaviour {
         cell = GetComponent<Cell>();
     }
 
-    public void WaitForFewSecond(Behaviour scriptName) {
-        StartCoroutine(DisableScript(scriptName));
+    public void WaitForFewSecond(Behaviour scriptName, float delay, Action onComplete = null) {
+        StartCoroutine(DisableScript(scriptName, delay, onComplete));
     }
 
-    IEnumerator DisableScript(Behaviour scriptName) {
+    IEnumerator DisableScript(Behaviour scriptName, float delay, Action onComplete) {
         scriptName.enabled = false;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(delay);
         scriptName.enabled = true;
+        onComplete?.Invoke();
     }
 
 }

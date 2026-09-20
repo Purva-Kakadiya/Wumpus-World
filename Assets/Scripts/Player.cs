@@ -21,7 +21,11 @@ public class Player : MonoBehaviour {
 
     private void Update() {
         parentCell = transform.parent.GetComponent<Cell>();
-        parentCell.SetVisitableCell();
+    }
+
+    public void SetCurrentCellUnvisitable() {
+        Cell parentCell = transform.parent.GetComponent<Cell>();
+        parentCell.SetCellUnvisitable();
     }
 
     //private void GameInput_OnMoveUpAction(object sender, EventArgs e) {

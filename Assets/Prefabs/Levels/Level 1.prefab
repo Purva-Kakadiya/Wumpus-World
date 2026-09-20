@@ -6240,6 +6240,7 @@ MonoBehaviour:
   startingCell: {fileID: 567116354222138239}
   endCell: {fileID: 1940736357577578489}
   playerPrefab: {fileID: 1502876830611740643, guid: 9424f193b6c74cf48beac9307810e241, type: 3}
+  playerSpawnDelay: 15
 --- !u!114 &6525743467068297547
 MonoBehaviour:
   m_ObjectHideFlags: 0

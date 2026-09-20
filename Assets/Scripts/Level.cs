@@ -7,8 +7,11 @@ public class Level : MonoBehaviour {
     [SerializeField] private Cell startingCell;
     [SerializeField] private Cell endCell;
     [SerializeField] private Player playerPrefab;
+    [SerializeField] private float playerSpawnDelay = 15f;
 
     private Player player;
+    private Vector3 playerTransform;
+    private WaitingTimer waitingTimer;
 
     private void Awake() {
         if(Instance != null) {
@@ -16,16 +19,29 @@ public class Level : MonoBehaviour {
         }
         Instance = this;
 
+        waitingTimer = GetComponent<WaitingTimer>();
     }
 
     public void LevelSpawned() {
-        PlayerVisitCell(startingCell);
+        PlayerSpawn(startingCell);
+    }
+
+    private void PlayerSpawn(Cell spawnCell) {
+        waitingTimer.WaitForFewSecond(this, playerSpawnDelay, () => {
+            Debug.Log("Player has Spawned!");
+            player = Instantiate(playerPrefab, spawnCell.transform);
+            player.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+            PlayerVisitCell(spawnCell);
+        });
     }
 
     public void PlayerVisitCell(Cell visitingCell) {
-        player = Instantiate(playerPrefab, visitingCell.transform);
-        Vector3 playerTransform = visitingCell.GetCellCenter();
-        player.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+        if(Player.Instance == null) {
+            Debug.LogError("Player Instance does not exist!");
+        }
+        visitingCell.SetVisitableCell();
+        player.transform.SetParent(visitingCell.transform, true);
+        playerTransform = visitingCell.GetCellCenter();
         player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
         MakePlayerRotationZero();
     }

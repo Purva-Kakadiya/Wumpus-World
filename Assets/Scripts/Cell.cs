@@ -43,7 +43,8 @@ public class Cell : MonoBehaviour {
             } else {
                 Level gameLevel = transform.parent.GetComponent<Level>();
                 if(gameLevel != null) {
-                    Debug.Log(gameLevel.name);
+                    Player.Instance.SetCurrentCellUnvisitable();
+                    gameLevel.PlayerVisitCell(this);
                 } else {
                     Debug.Log("Level not found!");
                 }
@@ -53,10 +54,10 @@ public class Cell : MonoBehaviour {
     }
 
     private void Update() {
-        if (isWaiting) {
-            movementManager.enabled = false;
-            boxCastManager.enabled = false;
-        }
+        //if (isWaiting) {
+        //    movementManager.enabled = false;
+        //    boxCastManager.enabled = false;
+        //}
 
         //if(isSnappedVisualActive) {
         //    if (boxCastManager.IsSnappingActive() == false) {
@@ -104,6 +105,10 @@ public class Cell : MonoBehaviour {
         routingManager.SetRoutePairActive();
     }
 
+    public void SetCellUnvisitable() {
+        routingManager.SetRoutePairInactive();
+    }
+
     public void SetRouteVisitability(bool isVisitable) {
         cellSelectionButton.interactable = isVisitable;
     }
@@ -146,7 +151,7 @@ public class Cell : MonoBehaviour {
 
         if (foundOtherDoor == true) {
             Transform innerDoor = boxCastManager.GetBoxCastOriginPoint(doorIndex - 1);
-            Debug.Log("Added boxcast pair " + innerDoor.parent.gameObject.name + "." + innerDoor.name + " and " + boxCastOriginPoint.parent.gameObject.name + "." + boxCastOriginPoint.name);
+            //Debug.Log("Added boxcast pair " + innerDoor.parent.gameObject.name + "." + innerDoor.name + " and " + boxCastOriginPoint.parent.gameObject.name + "." + boxCastOriginPoint.name);
             SetRouting(innerDoor, boxCastOriginPoint);
             boxCastingCell.SetRouting(boxCastOriginPoint, innerDoor);
         }
@@ -207,8 +212,8 @@ public class Cell : MonoBehaviour {
 
     private void SetRouting(Transform movingCellDoor, Transform boxCastOriginPoint) {
 
-        waitingTimer.WaitForFewSecond(boxCastManager);
-        waitingTimer.WaitForFewSecond(polygonCollider);
+        waitingTimer.WaitForFewSecond(boxCastManager, 2f);
+        waitingTimer.WaitForFewSecond(polygonCollider, 2f);
         routingManager.SetRoutePair(movingCellDoor, boxCastOriginPoint);
     }
 
