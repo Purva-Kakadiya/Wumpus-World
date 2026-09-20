@@ -12,6 +12,7 @@ public class Level : MonoBehaviour {
     private Player player;
     private Vector3 playerTransform;
     private WaitingTimer waitingTimer;
+    private bool buttonClicked = false;
 
     private void Awake() {
         if(Instance != null) {
@@ -24,6 +25,10 @@ public class Level : MonoBehaviour {
 
     public void LevelSpawned() {
         PlayerSpawn(startingCell);
+    }
+
+    public void SetButtonClicked(bool flag) {
+        buttonClicked = flag;
     }
 
     private void PlayerSpawn(Cell spawnCell) {
@@ -42,7 +47,15 @@ public class Level : MonoBehaviour {
         visitingCell.SetVisitableCell();
         player.transform.SetParent(visitingCell.transform, true);
         playerTransform = visitingCell.GetCellCenter();
-        player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
+        //player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
+
+        Vector3 destination = playerTransform - new Vector3(0, 0.2f, 0);
+        Vector3 moveDir = (destination - player.transform.position).normalized;
+        Cell currentPlayerCell = player.transform.parent.GetComponent<Cell>();
+        float distanceBetweenCenterAndBorder = currentPlayerCell.GetDistanceToBorderFromCenter();
+        Vector3 jumpPosition = player.transform.position + moveDir * distanceBetweenCenterAndBorder;
+
+        player.StartAnimation(destination, jumpPosition);
         MakePlayerRotationZero();
     }
 

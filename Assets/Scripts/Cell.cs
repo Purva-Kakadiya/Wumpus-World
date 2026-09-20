@@ -11,6 +11,7 @@ public class Cell : MonoBehaviour {
     [SerializeField] private Transform movingCellDoor;
     [SerializeField] private int defaultSnapDoorNumber;
     [SerializeField] private int numberOfDoors;
+    [SerializeField] private float distanceToBorderFromCenter;
 
     private PolygonCollider2D polygonCollider;
     private MovementManager movementManager;
@@ -44,6 +45,7 @@ public class Cell : MonoBehaviour {
                 Level gameLevel = transform.parent.GetComponent<Level>();
                 if(gameLevel != null) {
                     Player.Instance.SetCurrentCellUnvisitable();
+
                     gameLevel.PlayerVisitCell(this);
                 } else {
                     Debug.Log("Level not found!");
@@ -99,6 +101,10 @@ public class Cell : MonoBehaviour {
     public Vector3 GetCellCenter() {
         Vector3 cellCenter = boxCastManager.GetCellCenter();
         return cellCenter;
+    }
+
+    public float GetDistanceToBorderFromCenter() {
+        return distanceToBorderFromCenter;
     }
 
     public void SetVisitableCell() {

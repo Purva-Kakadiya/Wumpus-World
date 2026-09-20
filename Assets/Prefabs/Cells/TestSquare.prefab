@@ -958,6 +958,7 @@ MonoBehaviour:
   movingCellDoor: {fileID: 7523097668006587675}
   defaultSnapDoorNumber: 1
   numberOfDoors: 4
+  distanceToBorderFromCenter: 0.45
 --- !u!114 &1924579651205467418
 MonoBehaviour:
   m_ObjectHideFlags: 0
