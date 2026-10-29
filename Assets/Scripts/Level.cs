@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Level : MonoBehaviour {
@@ -7,7 +8,7 @@ public class Level : MonoBehaviour {
     [SerializeField] private Cell startingCell;
     [SerializeField] private Cell endCell;
     [SerializeField] private Player playerPrefab;
-    [SerializeField] private float playerSpawnDelay = 15f;
+    //[SerializeField] private float playerSpawnDelay = 15f;
 
     private Player player;
     private Vector3 playerTransform;
@@ -32,12 +33,11 @@ public class Level : MonoBehaviour {
     }
 
     private void PlayerSpawn(Cell spawnCell) {
-        waitingTimer.WaitForFewSecond(this, playerSpawnDelay, () => {
-            Debug.Log("Player has Spawned!");
-            player = Instantiate(playerPrefab, spawnCell.transform);
-            player.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
-            PlayerVisitCell(spawnCell);
-        });
+        Debug.Log("Player has Spawned!");
+        player = Instantiate(playerPrefab, spawnCell.transform);
+        player.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        player.transform.localPosition = new Vector3(0f, 0f, -0.5f);
+        PlayerVisitCell(spawnCell);
     }
 
     public void PlayerVisitCell(Cell visitingCell) {
@@ -49,7 +49,8 @@ public class Level : MonoBehaviour {
         playerTransform = visitingCell.GetCellCenter();
         //player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
 
-        Vector3 destination = playerTransform - new Vector3(0, 0.2f, 0);
+        //Vector3 destination = playerTransform - new Vector3(0, 0.2f, 0);
+        Vector3 destination = visitingCell.GetPlayerSnapPoint();
         Vector3 moveDir = (destination - player.transform.position).normalized;
         Cell currentPlayerCell = player.transform.parent.GetComponent<Cell>();
         float distanceBetweenCenterAndBorder = currentPlayerCell.GetDistanceToBorderFromCenter();
@@ -63,6 +64,57 @@ public class Level : MonoBehaviour {
         Transform currentPlayerCell = player.transform.parent;
         float cellRotation = currentPlayerCell.eulerAngles.z;
         player.transform.rotation = Quaternion.Euler(0f, 0f, cellRotation - cellRotation);
+    }
+
+#if UNITY_EDITOR
+    private bool contextMenuRunning = false;
+
+    [ContextMenu("Connect cells")]
+
+    private void StartConnectingCells() {
+        if(contextMenuRunning == true) {
+            return;
+        }
+
+        contextMenuRunning = true;
+        EditorApplication.update += Tick;
+        Debug.Log("Connection Started");
+    }
+
+    [ContextMenu("Stop Connecting cells")]
+
+    private void StopConnectionCells() {
+        if(contextMenuRunning == false) {
+            return;
+        }
+
+        EditorApplication.update -= Tick;
+        contextMenuRunning = false;
+        EditorUtility.SetDirty(this);
+        Debug.Log("Connection Stopped");
+    }
+
+    [ContextMenu("Stop Connecting cells", true)]
+
+    private bool ValidateStop() => contextMenuRunning;
+
+    private void Tick() {
+        if(this == null) {
+            EditorApplication.update -= Tick;
+            return;
+        }
+
+        ConnectCells();
+    }
+
+#endif
+
+    private void ConnectCells() {
+        Cell[] cells = GetComponentsInChildren<Cell>(true);
+
+        foreach (Cell cell in cells) {
+            cell.ActivateBoxCast();
+        }
     }
 
 }

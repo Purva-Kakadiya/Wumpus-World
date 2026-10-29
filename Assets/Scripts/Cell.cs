@@ -18,8 +18,11 @@ public class Cell : MonoBehaviour {
     private WaitingTimer waitingTimer;
     private BoxCastManager boxCastManager;
     private RoutingManager routingManager;
+
+    private Vector3 playerSnapPoint = new Vector3(0f, 0.18f, -0.5f);
     private bool isWaiting = false;
     private bool isSnappedVisualActive = false;
+    private bool referenceSet = false;
 
 
     private Transform lastCellTransform;
@@ -32,7 +35,11 @@ public class Cell : MonoBehaviour {
         waitingTimer = GetComponent<WaitingTimer>();
         boxCastManager = GetComponent<BoxCastManager>();
         routingManager = GetComponent<RoutingManager>();
-        boxCastManager = GetComponent<BoxCastManager>();
+        referenceSet = true;
+
+        if(Application.isPlaying == false) {
+            return;
+        }
 
         if (GameModeManager.Instance.GetCurrentGameMode() == GameMode.PlayGame) {
             cellSelectionButton.interactable = false;
@@ -111,6 +118,10 @@ public class Cell : MonoBehaviour {
         routingManager.SetRoutePairActive();
     }
 
+    public Vector3 GetPlayerSnapPoint() {
+        return playerSnapPoint;
+    }
+
     public void SetCellUnvisitable() {
         routingManager.SetRoutePairInactive();
     }
@@ -129,6 +140,9 @@ public class Cell : MonoBehaviour {
 
     public void SetRoute(Vector3 boxCastDirectionNormalized, Transform boxCastOriginPoint, Cell boxCastingCell) {
         int doorIndex = defaultSnapDoorNumber;
+        if(movementManager == null) {
+            Awake();
+        }
         int wantedRotation = movementManager.GetSnapPointRotation(boxCastDirectionNormalized);
         int currentRotation = GetNumInRange((int)transform.eulerAngles.z);
         int maxLoops = numberOfDoors;
@@ -191,6 +205,13 @@ public class Cell : MonoBehaviour {
         SelectionManager.Instance.SetActiveObject(gameObject);
         EditMapOptionsUI.Instance.SetConfirmPanelActive(this);
         routingManager.ResetSnappedDoorList();
+    }
+
+    public void ActivateBoxCast() {
+        if(referenceSet == false) {
+            Awake();
+        }
+        boxCastManager.ActivateBoxCast();
     }
 
     public void RemoveSnapPairWithKey(Transform innerDoor, Transform outerDoor) {

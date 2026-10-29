@@ -12,7 +12,7 @@ TagManager:
   - Grid Map
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Player
+    uniqueID: 1308584817
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

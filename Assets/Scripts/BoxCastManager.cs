@@ -18,11 +18,13 @@ public class BoxCastManager : MonoBehaviour {
     private PolygonCollider2D polygonCollider;
     private bool isSnapped = false;
     private bool atleastOneBoxCastHit = false;
+    private bool referenceSet = false;
 
 
     private void Awake() {
         cell = GetComponent<Cell>();
         polygonCollider = GetComponent<PolygonCollider2D>();
+        referenceSet = true;
     }
 
     private void Update() {
@@ -36,11 +38,13 @@ public class BoxCastManager : MonoBehaviour {
                 lastHitCell = null;
             }
         }
-
     }
-        
 
-    private void ActivateBoxCast() {
+    public void ActivateBoxCast() {
+        if(referenceSet == false) {
+            Awake();
+        }
+
         for (int i = 0; i < boxCastOriginPointsArray.Length; i++) {
 
             if (cell.BoxCastInRouteManager(boxCastOriginPointsArray[i])) {
@@ -58,7 +62,7 @@ public class BoxCastManager : MonoBehaviour {
 
             if ((hit.collider != null) && (hit.collider != polygonCollider)) {
                 if (hit.collider.TryGetComponent<Cell>(out Cell targetCell)) {
-                    if (targetCell.IsObjectSelected()) {
+                    if (Application.isPlaying == true && targetCell.IsObjectSelected()) {
                         PolygonCollider2D targetCollider2D = targetCell.GetCollider();
                         Vector2 targetColliderCenter = targetCollider2D.bounds.center;
 
