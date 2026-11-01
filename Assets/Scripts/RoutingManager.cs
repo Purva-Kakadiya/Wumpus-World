@@ -70,6 +70,20 @@ public class RoutingManager : MonoBehaviour {
         }
     }
 
+    public List<Cell> GetVisitableCells() {
+        List<Cell> visitableCellsList = new List<Cell>();
+        foreach(RoutePair pair in routePairList) {
+            Cell visitableCell = pair.outerDoor.parent.GetComponent<Cell>();
+            if(visitableCell == null) {
+                Debug.LogError("Unvisitable outer door found in cell " + gameObject.name);
+            }
+            if((visitableCell.GetCellVisibilityState() == CellVisibilityState.Visitable) && (visitableCellsList.Contains(visitableCell) == false)) {
+                visitableCellsList.Add(visitableCell);
+            }
+        }
+        return visitableCellsList;
+    }
+
     public void SetRoutePairInactive() {
         foreach (RoutePair pair in routePairList) {
             Cell otherCell = pair.outerDoor.parent.GetComponent<Cell>();

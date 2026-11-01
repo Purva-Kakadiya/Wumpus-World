@@ -26,6 +26,10 @@ public class Player : MonoBehaviour {
         parentCell = transform.parent.GetComponent<Cell>();
     }
 
+    public Cell GetCurrentlyVisitedCell() {
+        return parentCell;
+    }
+
     public void SetCurrentCellUnvisitable() {
         Cell parentCell = transform.parent.GetComponent<Cell>();
         parentCell.SetCellUnvisitable();

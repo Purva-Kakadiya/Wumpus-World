@@ -13114,6 +13114,7 @@ GameObject:
   - component: {fileID: 6871467544569953711}
   - component: {fileID: 4864355386122244039}
   - component: {fileID: 4478929016269619866}
+  - component: {fileID: 2628910721668586530}
   m_Layer: 3
   m_Name: Level 1
   m_TagString: Untagged
@@ -13179,6 +13180,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a01af2c1b7524443834b8e258e46c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaitingTimer
+--- !u!114 &2628910721668586530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252476173796191400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6bb89c535032874f8636505e766f161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CellVisibilityManager
 --- !u!1 &6324622152798689333
 GameObject:
   m_ObjectHideFlags: 0

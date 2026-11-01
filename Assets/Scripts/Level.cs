@@ -12,6 +12,7 @@ public class Level : MonoBehaviour {
 
     private Player player;
     private Vector3 playerTransform;
+    private CellVisibilityManager cellVisibilityManager;
     private WaitingTimer waitingTimer;
     private bool buttonClicked = false;
 
@@ -21,6 +22,7 @@ public class Level : MonoBehaviour {
         }
         Instance = this;
 
+        cellVisibilityManager = GetComponent<CellVisibilityManager>();
         waitingTimer = GetComponent<WaitingTimer>();
     }
 
@@ -44,6 +46,11 @@ public class Level : MonoBehaviour {
         if(Player.Instance == null) {
             Debug.LogError("Player Instance does not exist!");
         }
+
+        cellVisibilityManager.SetVisitedCell(visitingCell);
+        cellVisibilityManager.SetVisitableCell(visitingCell);
+
+
         visitingCell.SetVisitableCell();
         player.transform.SetParent(visitingCell.transform, true);
         playerTransform = visitingCell.GetCellCenter();
@@ -64,6 +71,10 @@ public class Level : MonoBehaviour {
         Transform currentPlayerCell = player.transform.parent;
         float cellRotation = currentPlayerCell.eulerAngles.z;
         player.transform.rotation = Quaternion.Euler(0f, 0f, cellRotation - cellRotation);
+    }
+
+    public void SetUnvisitedCells(Cell currentCell) {
+        cellVisibilityManager.SetUnvisitedCells(currentCell);
     }
 
 #if UNITY_EDITOR

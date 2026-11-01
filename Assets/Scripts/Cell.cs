@@ -3,6 +3,14 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
+
+public enum CellVisibilityState {
+    Unknown,
+    Visitable,
+    Unvisitable,
+    Visited
+}
 
 public class Cell : MonoBehaviour {
 
@@ -13,11 +21,15 @@ public class Cell : MonoBehaviour {
     [SerializeField] private int numberOfDoors;
     [SerializeField] private float distanceToBorderFromCenter;
 
+    public CellVisibilityState CellState { get; private set; } = CellVisibilityState.Unknown;
+
     private PolygonCollider2D polygonCollider;
+    private TextMeshProUGUI buttonText;
     private MovementManager movementManager;
     private WaitingTimer waitingTimer;
     private BoxCastManager boxCastManager;
     private RoutingManager routingManager;
+    private CellVisibilityManager cellVisibilityManager;
 
     private Vector3 playerSnapPoint = new Vector3(0f, 0.18f, -0.5f);
     private bool isWaiting = false;
@@ -35,6 +47,10 @@ public class Cell : MonoBehaviour {
         waitingTimer = GetComponent<WaitingTimer>();
         boxCastManager = GetComponent<BoxCastManager>();
         routingManager = GetComponent<RoutingManager>();
+        cellVisibilityManager = GetComponentInParent<CellVisibilityManager>();
+
+        buttonText = cellSelectionButton.GetComponentInChildren<TextMeshProUGUI>();
+        UpdateText(buttonText);
         referenceSet = true;
 
         if(Application.isPlaying == false) {
@@ -51,6 +67,8 @@ public class Cell : MonoBehaviour {
             } else {
                 Level gameLevel = transform.parent.GetComponent<Level>();
                 if(gameLevel != null) {
+                    Cell currentCell = Player.Instance.GetCurrentlyVisitedCell();
+                    gameLevel.SetUnvisitedCells(currentCell);
                     Player.Instance.SetCurrentCellUnvisitable();
 
                     gameLevel.PlayerVisitCell(this);
@@ -79,6 +97,41 @@ public class Cell : MonoBehaviour {
     //public bool IsSnappingVisualActive() {
     //    return isSnappedVisualActive;
     //}
+
+    public void SetCellVisibilityState(CellVisibilityState newState) {
+        CellState = newState;
+
+        switch (newState) {
+            case CellVisibilityState.Unknown:
+                break;
+            case CellVisibilityState.Visitable:
+                break;
+            case CellVisibilityState.Unvisitable:
+                break;
+            case CellVisibilityState.Visited:
+                break;
+            default:
+                Debug.LogError("Unregistered CellVisibilityState: " + newState);
+                break;
+        }
+
+        UpdateText(buttonText);
+    }
+
+    private void UpdateText(TextMeshProUGUI buttonText) {
+        buttonText.text = $"{gameObject.name}\n{CellState}";
+        buttonText.fontSize = 0.1f;
+        buttonText.alignment = TextAlignmentOptions.Center;
+        buttonText.color = Color.black;
+    }
+
+    public CellVisibilityState GetCellVisibilityState() {
+        return CellState;
+    }
+
+    public List<Cell> GetVisitableCells() {
+        return routingManager.GetVisitableCells();
+    }
 
     public Transform GetTransform(Cell cell) {
         //Transform cellTransform = movementManager.GetObjectTransform(cell);

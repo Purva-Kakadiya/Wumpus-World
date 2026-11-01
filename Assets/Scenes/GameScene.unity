@@ -9504,6 +9504,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CloudParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 1089142697059132723, guid: cb3848c9e86feaa4789a33589e7eaa8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1855785916985863089, guid: cb3848c9e86feaa4789a33589e7eaa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.60357
