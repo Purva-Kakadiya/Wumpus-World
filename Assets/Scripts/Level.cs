@@ -27,6 +27,7 @@ public class Level : MonoBehaviour {
     }
 
     public void LevelSpawned() {
+        cellVisibilityManager.SpawnCloudForUnknownCells();
         PlayerSpawn(startingCell);
     }
 
@@ -48,10 +49,9 @@ public class Level : MonoBehaviour {
         }
 
         cellVisibilityManager.SetVisitedCell(visitingCell);
-        cellVisibilityManager.SetVisitableCell(visitingCell);
-
 
         visitingCell.SetVisitableCell();
+
         player.transform.SetParent(visitingCell.transform, true);
         playerTransform = visitingCell.GetCellCenter();
         //player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
@@ -65,6 +65,8 @@ public class Level : MonoBehaviour {
 
         player.StartAnimation(destination, jumpPosition);
         MakePlayerRotationZero();
+
+        cellVisibilityManager.SetVisitableCell(visitingCell);
     }
 
     private void MakePlayerRotationZero() {

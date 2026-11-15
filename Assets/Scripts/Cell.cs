@@ -17,6 +17,7 @@ public class Cell : MonoBehaviour {
     [SerializeField] private Button cellSelectionButton;
     [SerializeField] private Transform snappedVisual;
     [SerializeField] private Transform movingCellDoor;
+    [SerializeField] private Transform cloudParticles;
     [SerializeField] private int defaultSnapDoorNumber;
     [SerializeField] private int numberOfDoors;
     [SerializeField] private float distanceToBorderFromCenter;
@@ -118,6 +119,13 @@ public class Cell : MonoBehaviour {
         UpdateText(buttonText);
     }
 
+    public void SetCloudParticleActivity(bool isActive) {
+        if(cloudParticles == null) {
+            Debug.LogError("CloudParticles reference not found in Cell: " + gameObject.name);
+        }
+        cloudParticles.gameObject.SetActive(isActive);
+    }
+
     private void UpdateText(TextMeshProUGUI buttonText) {
         buttonText.text = $"{gameObject.name}\n{CellState}";
         buttonText.fontSize = 0.1f;
@@ -130,7 +138,7 @@ public class Cell : MonoBehaviour {
     }
 
     public List<Cell> GetVisitableCells() {
-        return routingManager.GetVisitableCells();
+        return routingManager.GetAdjacentCells();
     }
 
     public Transform GetTransform(Cell cell) {
