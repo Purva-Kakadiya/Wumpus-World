@@ -3,14 +3,15 @@ using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Net;
 
 [System.Serializable]
 public struct RoutePair {
     public Transform innerDoor;
     public Transform outerDoor;
 
-    public RoutePair(Transform door, Transform outerDoor) {
-        this.innerDoor = door;
+    public RoutePair(Transform innerDoor, Transform outerDoor) {
+        this.innerDoor = innerDoor;
         this.outerDoor = outerDoor;
     }
 }
@@ -35,13 +36,17 @@ public class RoutingManager : MonoBehaviour {
         //}
     }
 
-    public void SetRoutePair(Transform door, Transform outerDoor) {
-        routePairs[door] = outerDoor;
-        routePairList.Add(new RoutePair(door, outerDoor));
+    public void SetRoutePair(Transform innerDoor, Transform outerDoor) {
+        if(routePairs.ContainsKey(innerDoor)) {
+            Debug.Log("Alread existing routePair!");
+            return;
+        }
+        routePairs[innerDoor] = outerDoor;
+        routePairList.Add(new RoutePair(innerDoor, outerDoor));
     }
 
-    public bool IsDoorInRoutePair(Transform door) {
-        if (routePairs.ContainsKey(door)) {
+    public bool IsDoorInRoutePair(Transform innerDoor) {
+        if (routePairs.ContainsKey(innerDoor)) {
             return true;
         }
         return false;
@@ -81,7 +86,6 @@ public class RoutingManager : MonoBehaviour {
                 visitableCellsList.Add(visitableCell);
             }
         }
-        Debug.Log("number of visitable cell found is: " + visitableCellsList.Count);
         return visitableCellsList;
     }
 

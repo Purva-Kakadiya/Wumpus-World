@@ -7,9 +7,14 @@ public class LevelSpawner : MonoBehaviour {
     [SerializeField] private Button level1Button;
     [SerializeField] private Level level1;
 
+    private GameModeManager gameModeManager;
+
     private void Awake() {
+        Transform gameModeManagerTransform = GameObject.Find("GameModeManager").transform;
+        gameModeManager = gameModeManagerTransform.GetComponent<GameModeManager>();
+
         level1Button.onClick.AddListener(() => {
-            GameModeManager.Instance.SetGameMode(GameMode.PlayGame);
+            gameModeManager.SetGameMode(GameMode.PlayGame);
 
             Level spawnLevel = Instantiate(level1, levelSpawnLocation);
             spawnLevel.LevelSpawned();

@@ -52,6 +52,8 @@ public class Level : MonoBehaviour {
 
         visitingCell.SetVisitableCell();
 
+        Cell currentPlayerCell = player.transform.parent.GetComponent<Cell>();
+        float distanceBetweenCenterAndBorder = currentPlayerCell.GetDistanceToBorderFromCenter();
         player.transform.SetParent(visitingCell.transform, true);
         playerTransform = visitingCell.GetCellCenter();
         //player.transform.position = playerTransform - new Vector3(0, 0.2f, 0);
@@ -59,11 +61,9 @@ public class Level : MonoBehaviour {
         //Vector3 destination = playerTransform - new Vector3(0, 0.2f, 0);
         Vector3 destination = visitingCell.GetPlayerSnapPoint();
         Vector3 moveDir = (destination - player.transform.position).normalized;
-        Cell currentPlayerCell = player.transform.parent.GetComponent<Cell>();
-        float distanceBetweenCenterAndBorder = currentPlayerCell.GetDistanceToBorderFromCenter();
-        Vector3 jumpPosition = player.transform.position + moveDir * distanceBetweenCenterAndBorder;
+        //Vector3 jumpPosition = player.transform.position + moveDir * distanceBetweenCenterAndBorder;
 
-        player.StartAnimation(destination, jumpPosition);
+        player.StartAnimation(destination, distanceBetweenCenterAndBorder);
         MakePlayerRotationZero();
 
         cellVisibilityManager.SetVisitableCell(visitingCell);

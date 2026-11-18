@@ -15,6 +15,8 @@ public class PlayerAnimation : MonoBehaviour {
     private bool isMoving = false;
     private bool hasJumped = false;
     private Vector3 targetPosition;
+    private float distanceToJump;
+    private float distanceMoved = 0f;
 
     private void Update() {
         if(isMoving) {
@@ -24,31 +26,33 @@ public class PlayerAnimation : MonoBehaviour {
             float distanceToDestination = Vector3.Distance(transform.localPosition, targetPosition);
             if (distanceToDestination <= playerSnapDistance) {
                 isMoving = false;
+                hasJumped = false;
+                distanceMoved = 0;
                 //animator.SetBool(IS_MOVING, false);
                 transform.localPosition = targetPosition;
-                Debug.Log("Player stopped Running!");
                 animator.ResetTrigger(START_RUNNING_TRIGGER);
                 animator.Play(DEFAULT_ANIMATION);
             }
+
+            distanceMoved += moveSpeed * Time.deltaTime;
+            //float distanceToJump = Vector3.Distance(transform.localPosition, this.distanceToJump);
+            if (Mathf.Abs(distanceMoved - distanceToJump) <= distanceBeforeJump && hasJumped == false) {
+                hasJumped = true;
+                Debug.Log("Player Jumped");
+                //animator.SetTrigger(HAS_JUMPED);
+            }
+            //Debug.Log(Mathf.Abs(distanceMoved - distanceToJump));
         }
     }
 
-    public void PlayerMovementAnimation(Vector3 destination, Vector3 jumpPosition) {
+    public void PlayerMovementAnimation(Vector3 destination, float jumpDistance) {
         destination = new Vector3(0f, 0f, -0.5f);
-        jumpPosition = new Vector3(jumpPosition.x, jumpPosition.y, -0.5f);
         targetPosition = destination;
+        distanceToJump = jumpDistance;
+        Debug.Log(distanceToJump);
         isMoving = true;
         hasJumped = false;
         animator.SetTrigger(START_RUNNING_TRIGGER);
-        Debug.Log("Player is moving");
-
-        float distanceToJump = Vector3.Distance(transform.localPosition, jumpPosition);
-        if(distanceToJump <= distanceBeforeJump && hasJumped == false) {
-            hasJumped = true;
-            Debug.Log("Player Jumped");
-            //animator.SetTrigger(HAS_JUMPED);
-        }
-
     }
 
 }

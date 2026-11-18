@@ -46,7 +46,6 @@ public class CellVisibilityManager : MonoBehaviour {
     public void SetVisitableCell(Cell visitingCell) {
         List<Cell> visitableCells = visitingCell.GetVisitableCells();
         foreach(Cell visitableCell in visitableCells) {
-            Debug.Log(visitableCell.transform.name);
             visitableCell.SetCellVisibilityState(CellVisibilityState.Visitable);
             visitableCell.SetCloudParticleActivity(false);
         }

@@ -31,6 +31,7 @@ public class Cell : MonoBehaviour {
     private BoxCastManager boxCastManager;
     private RoutingManager routingManager;
     private CellVisibilityManager cellVisibilityManager;
+    private GameModeManager gameModeManager;
 
     private Vector3 playerSnapPoint = new Vector3(0f, 0.18f, -0.5f);
     private bool isWaiting = false;
@@ -49,21 +50,25 @@ public class Cell : MonoBehaviour {
         boxCastManager = GetComponent<BoxCastManager>();
         routingManager = GetComponent<RoutingManager>();
         cellVisibilityManager = GetComponentInParent<CellVisibilityManager>();
+        Transform gameModeManagerTransform = GameObject.Find("GameModeManager").transform;
+        gameModeManager = gameModeManagerTransform.GetComponent<GameModeManager>();
 
-        buttonText = cellSelectionButton.GetComponentInChildren<TextMeshProUGUI>();
-        UpdateText(buttonText);
+        //buttonText = cellSelectionButton.GetComponentInChildren<TextMeshProUGUI>();
+        //UpdateText(buttonText);
         referenceSet = true;
+
+
 
         if(Application.isPlaying == false) {
             return;
         }
 
-        if (GameModeManager.Instance.GetCurrentGameMode() == GameMode.PlayGame) {
+        if (gameModeManager.GetCurrentGameMode() == GameMode.PlayGame) {
             cellSelectionButton.interactable = false;
         }
 
         cellSelectionButton.onClick.AddListener(() => {
-            if (GameModeManager.Instance.GetCurrentGameMode() == GameMode.EditMap) {
+            if (gameModeManager.GetCurrentGameMode() == GameMode.EditMap) {
                 ActivateCellMovement();
             } else {
                 Level gameLevel = transform.parent.GetComponent<Level>();
@@ -116,7 +121,7 @@ public class Cell : MonoBehaviour {
                 break;
         }
 
-        UpdateText(buttonText);
+        //UpdateText(buttonText);
     }
 
     public void SetCloudParticleActivity(bool isActive) {
@@ -126,12 +131,12 @@ public class Cell : MonoBehaviour {
         cloudParticles.gameObject.SetActive(isActive);
     }
 
-    private void UpdateText(TextMeshProUGUI buttonText) {
-        buttonText.text = $"{gameObject.name}\n{CellState}";
-        buttonText.fontSize = 0.1f;
-        buttonText.alignment = TextAlignmentOptions.Center;
-        buttonText.color = Color.black;
-    }
+    //private void UpdateText(TextMeshProUGUI buttonText) {
+    //    buttonText.text = $"{gameObject.name}\n{CellState}";
+    //    buttonText.fontSize = 0.1f;
+    //    buttonText.alignment = TextAlignmentOptions.Center;
+    //    buttonText.color = Color.black;
+    //}
 
     public CellVisibilityState GetCellVisibilityState() {
         return CellState;
@@ -272,7 +277,11 @@ public class Cell : MonoBehaviour {
         if(referenceSet == false) {
             Awake();
         }
-        boxCastManager.ActivateBoxCast();
+
+        if (!Application.isPlaying) {
+            boxCastManager.ActivateBoxCast();
+            return;
+        }
     }
 
     public void RemoveSnapPairWithKey(Transform innerDoor, Transform outerDoor) {

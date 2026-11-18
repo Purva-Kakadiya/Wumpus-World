@@ -35,8 +35,8 @@ public class Player : MonoBehaviour {
         parentCell.SetCellUnvisitable();
     }
 
-    public void StartAnimation(Vector3 startPosition, Vector3 jumpPosition) {
-        playerAnimation.PlayerMovementAnimation(startPosition, jumpPosition);
+    public void StartAnimation(Vector3 startPosition, float jumpDistance) {
+        playerAnimation.PlayerMovementAnimation(startPosition, jumpDistance);
     }
 
     //private void GameInput_OnMoveUpAction(object sender, EventArgs e) {

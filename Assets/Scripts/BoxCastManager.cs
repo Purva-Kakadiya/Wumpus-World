@@ -29,7 +29,7 @@ public class BoxCastManager : MonoBehaviour {
 
     private void Update() {
         if(!cell.IsObjectSelected()) {
-            ActivateBoxCast();
+            cell.ActivateBoxCast();
         }
 
         if (lastHitCell != null) {
