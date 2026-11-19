@@ -12,6 +12,7 @@ public class Level : MonoBehaviour {
 
     private Player player;
     private Vector3 playerTransform;
+    private MonsterCell monsterCell;
     private CellVisibilityManager cellVisibilityManager;
     private WaitingTimer waitingTimer;
     private bool buttonClicked = false;
@@ -65,6 +66,11 @@ public class Level : MonoBehaviour {
 
         player.StartAnimation(destination, distanceBetweenCenterAndBorder);
         MakePlayerRotationZero();
+
+        monsterCell = visitingCell.GetComponent<MonsterCell>();
+        if(monsterCell != null) {
+            return;
+        }
 
         cellVisibilityManager.SetVisitableCell(visitingCell);
     }

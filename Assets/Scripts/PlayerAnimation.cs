@@ -9,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour {
 
     private const string START_RUNNING_TRIGGER = "startRunningTrigger";
     private const string DEFAULT_ANIMATION = "PlayerIdleAnimation";
+    private Player player;
     //private const string IS_MOVING = "isMoving";
     //private const string HAS_JUMPED = "hasJumped";
 
@@ -17,6 +18,13 @@ public class PlayerAnimation : MonoBehaviour {
     private Vector3 targetPosition;
     private float distanceToJump;
     private float distanceMoved = 0f;
+
+    private void Awake() {
+        player = GetComponentInParent<Player>();
+        if(player == null) {
+            Debug.LogError("Player script not found from PlayerAnimation script!");
+        }
+    }
 
     private void Update() {
         if(isMoving) {
@@ -32,6 +40,7 @@ public class PlayerAnimation : MonoBehaviour {
                 transform.localPosition = targetPosition;
                 animator.ResetTrigger(START_RUNNING_TRIGGER);
                 animator.Play(DEFAULT_ANIMATION);
+                player.CheckForMonsterCell();
             }
 
             distanceMoved += moveSpeed * Time.deltaTime;

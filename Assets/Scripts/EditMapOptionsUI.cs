@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class EditMapOptionsUI : MonoBehaviour {
     [SerializeField] private Button spawnSquareButton;
     [SerializeField] private Button spawnTriangleButton;
     [SerializeField] private Button spawnHexagonButton;
+    [SerializeField] private Button addMonsterButton;
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private Transform confirmPanel;
@@ -49,6 +51,18 @@ public class EditMapOptionsUI : MonoBehaviour {
         spawnHexagonButton.onClick.AddListener(() => {
             confirmPanel.gameObject.SetActive(true);
             SpawnTheCell(hexagon);
+        });
+
+        addMonsterButton.onClick.AddListener(() => {
+            if(SelectionManager.Instance.GetActiveObject() != null) {
+                GameObject activeObject = SelectionManager.Instance.GetActiveObject();
+                Cell activeCell = activeObject.GetComponent<Cell>();
+                if (activeCell != null) {
+                    activeCell.AddComponent<MonsterCell>();
+                } else {
+                    Debug.Log("No cell selected to add monster!");
+                }
+            }
         });
 
         confirmButton.onClick.AddListener(() => {
